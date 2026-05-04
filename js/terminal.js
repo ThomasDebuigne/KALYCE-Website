@@ -3,22 +3,18 @@
     help: [
       "Commandes disponibles :",
       "status",
-      "archives",
-      "camera",
-      "entity",
-      "andy",
-      "alice",
-      "faceless",
-      "chimera",
       "kalyce",
-      "deviance",
+      "application",
+      "entity",
+      "failed",
       "clear"
     ],
     status: [
-      "Syst\u00e8me : instable",
-      "Flux cam\u00e9ra : partiellement corrompu",
-      "Personnel : absent",
-      "Observation : en cours"
+      "Syst\u00e8me : ancien",
+      "Site public : incomplet volontairement",
+      "Candidatures : ouvertes",
+      "Dossiers rates : non lies",
+      "Observation : reciproque"
     ],
     archives: [
       "/archives/origin_report_1979.txt",
@@ -26,14 +22,25 @@
       "/archives/faceless_camera_corruption.txt",
       "Acc\u00e8s complet refus\u00e9."
     ],
+    application: [
+      "Formulaire actif : apply.html",
+      "Aucun envoi reseau.",
+      "Les candidats sont retenus localement, puis oublies officiellement."
+    ],
     camera: [
       "CAM_03 : mouvement non attribu\u00e9.",
       "CAM_06 : le mannequin n'\u00e9tait pas l\u00e0 hier.",
       "CAM_08 : signal interrompu."
     ],
     entity: [
-      "Entr\u00e9es : andy, alice, faceless, chimera.",
-      "Ne pas demander le dossier scell\u00e9."
+      "Entr\u00e9es ratees : andy, alice, faceless, chimera.",
+      "Index cache : entities.html",
+      "Ne pas ouvrir seul."
+    ],
+    failed: [
+      "4 experiences ratees conservees.",
+      "Chemin local : /entities.html",
+      "La page ne figure pas dans la navigation. C'est intentionnel."
     ],
     andy: [
       "ANDY r\u00e9pond \u00e0 la diffusion sonore.",
@@ -52,8 +59,9 @@
       "La proximit\u00e9 annule la proc\u00e9dure."
     ],
     kalyce: [
-      "KALYCE d\u00e9cline toute responsabilit\u00e9.",
-      "Contrat suspendu. Archives maintenues."
+      "KALYCE commence avant son acte de naissance.",
+      "Les succes sont publics parce qu'ils mentent bien.",
+      "Les echecs sont caches parce qu'ils repondent."
     ],
     deviance: [
       "Nom de protocole reconnu.",

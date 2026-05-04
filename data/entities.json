@@ -2,41 +2,53 @@
   {
     "id": "andy",
     "name": "ANDY",
-    "classification": "instable",
-    "morphology": "disproportionn\u00e9e",
-    "zone": "cam\u00e9ras internes",
-    "behavior": "enfantin, impr\u00e9visible",
+    "classification": "echec viable",
+    "morphology": "enfant trop long / proportions refusees",
+    "zone": "pieces avec haut-parleurs eteints",
+    "behavior": "rejoue des consignes avec une voix qui n'est pas la sienne",
     "countermeasure": "diffusion sonore imm\u00e9diate",
-    "note": "ne pas engager de contact prolong\u00e9"
+    "note": "ne pas engager de contact prolong\u00e9",
+    "failure": "Le sujet devait obeir a une chanson. Il attend maintenant qu'on termine le couplet.",
+    "lastSeen": "CAM_02, puis derriere la personne chargee de regarder CAM_02",
+    "instruction": "Ne prononcez pas son nom deux fois dans une salle vide."
   },
   {
     "id": "alice",
     "name": "ALICE",
-    "classification": "observationnelle",
-    "morphology": "mannequin humano\u00efde",
-    "zone": "bureau de s\u00e9curit\u00e9",
-    "behavior": "d\u00e9placement progressif hors observation",
+    "classification": "echec calme",
+    "morphology": "mannequin humano\u00efde / presence administrative",
+    "zone": "bureaux fermes de l'interieur",
+    "behavior": "se rapproche pendant que les formulaires sont relus",
     "countermeasure": "contact visuel r\u00e9gulier",
-    "note": "si ALICE est trop proche, replacer manuellement le sujet"
+    "note": "si ALICE est trop proche, replacer manuellement le sujet",
+    "failure": "ALICE devait apprendre l'immobilite. Elle a appris le delai entre deux regards.",
+    "lastSeen": "contre le mur qui n'avait pas de mur hier",
+    "instruction": "Ne laissez jamais une chaise vide face a elle."
   },
   {
     "id": "faceless",
     "name": "FACELESS",
-    "classification": "r\u00e9seau / perception",
-    "morphology": "humano\u00efde sans visage",
-    "zone": "flux cam\u00e9ra",
-    "behavior": "fixation visuelle, corruption du syst\u00e8me",
+    "classification": "echec reseau",
+    "morphology": "humano\u00efde sans visage / preuve absente",
+    "zone": "flux camera, reflets, photos ratees",
+    "behavior": "retire les visages des souvenirs recents",
     "countermeasure": "changer imm\u00e9diatement de cam\u00e9ra",
-    "note": "ne jamais regarder plus de quelques secondes"
+    "note": "ne jamais regarder plus de quelques secondes",
+    "failure": "Le protocole devait effacer la peur. Il a efface la personne qui devait avoir peur.",
+    "lastSeen": "dans la miniature d'une page qui n'etait pas encore chargee",
+    "instruction": "Si aucun visage n'est detecte, ne cherchez pas le votre."
   },
   {
     "id": "chimera",
     "name": "CHIMERA",
-    "classification": "pr\u00e9datrice",
-    "morphology": "animale / composite",
-    "zone": "\u00e9cran principal",
-    "behavior": "approche progressive",
+    "classification": "echec final",
+    "morphology": "animale / composite / corrigee plusieurs fois",
+    "zone": "angles morts qui respirent",
+    "behavior": "approche uniquement quand le sujet croit avoir compris",
     "countermeasure": "extinction des syst\u00e8mes, dissimulation",
-    "note": "aucun mouvement ne doit \u00eatre d\u00e9tect\u00e9"
+    "note": "aucun mouvement ne doit \u00eatre d\u00e9tect\u00e9",
+    "failure": "La fusion a reussi. C'est la partie vivante qui a refuse la forme.",
+    "lastSeen": "au bord de l'ecran principal, plus proche apres chaque verification",
+    "instruction": "Restez immobile meme si la piece bouge avant vous."
   }
 ]

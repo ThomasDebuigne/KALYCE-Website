@@ -156,12 +156,12 @@
       }
       const generatedId = `KSD-${Math.floor(100 + Math.random() * 900)}-${Math.floor(10 + Math.random() * 90)}`;
       localStorage.setItem(keys.applicationSubmitted, "true");
-      localStorage.setItem(keys.access, "surveillance");
+      localStorage.setItem(keys.access, "candidate");
       localStorage.setItem(keys.tempId, generatedId);
       form.hidden = true;
       accepted.hidden = false;
       if (tempNode) tempNode.textContent = generatedId;
-      showSystemDialog("CANDIDATURE ACCEPT\u00c9E", "Niveau d'acc\u00e8s : SURVEILLANCE. Votre premi\u00e8re nuit commence bient\u00f4t.");
+      showSystemDialog("CANDIDATURE ACCEPT\u00c9E", "Niveau d'acc\u00e8s : ATTENTE. Votre dossier a ete ajoute.");
     });
   }
 
@@ -225,8 +225,10 @@
                 <li><strong>Morphologie :</strong> ${escapeHtml(entity.morphology)}</li>
                 <li><strong>Zone :</strong> ${escapeHtml(entity.zone)}</li>
                 <li><strong>Comportement :</strong> ${escapeHtml(entity.behavior)}</li>
+                ${entity.failure ? `<li><strong>Echec :</strong> ${escapeHtml(entity.failure)}</li>` : ""}
+                ${entity.lastSeen ? `<li><strong>Derni&egrave;re preuve :</strong> ${escapeHtml(entity.lastSeen)}</li>` : ""}
                 <li><strong>Contre-mesure :</strong> ${escapeHtml(entity.countermeasure)}</li>
-                <li><strong>Note :</strong> ${escapeHtml(entity.note)}</li>
+                <li><strong>Instruction :</strong> ${escapeHtml(entity.instruction || entity.note)}</li>
               </ul>
             </div>
           </article>
