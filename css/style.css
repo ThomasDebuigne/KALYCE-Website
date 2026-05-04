@@ -247,12 +247,8 @@ p {
   color: var(--green);
   font-family: var(--mono);
   font-size: 12px;
-  content: "[ hidden personnel directory - last update 04/05/2001 - cached page may be wrong ]";
 }
 
-.kalyce-dossier::before {
-  content: "[ archived KALYCE introduction - source confidence 17% - do not correct spelling ]";
-}
 
 .system-label,
 .panel-header,
