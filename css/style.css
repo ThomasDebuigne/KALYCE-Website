@@ -219,6 +219,28 @@ p {
   text-align: center;
 }
 
+.kalyce-dossier {
+  position: relative;
+  overflow: hidden;
+}
+
+.kalyce-dossier > *:not(.kalyce-mark) {
+  position: relative;
+  z-index: 1;
+}
+
+.kalyce-mark {
+  position: absolute;
+  right: -120px;
+  bottom: -180px;
+  z-index: 0;
+  width: min(640px, 92vw);
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  filter: contrast(1.35);
+  pointer-events: none;
+}
+
 .hero-console::before {
   display: block;
   margin: 4px auto 12px;
@@ -1067,6 +1089,13 @@ body[data-page="entities"] .entity-facts li {
 
   .entity-visual {
     margin-bottom: 8px;
+  }
+
+  .kalyce-mark {
+    right: -170px;
+    bottom: -120px;
+    width: 520px;
+    opacity: 0.11;
   }
 
   .incident-meta {

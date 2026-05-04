@@ -4,68 +4,88 @@
       "Commandes disponibles :",
       "status",
       "kalyce",
+      "isen",
+      "daughter",
       "application",
-      "entity",
       "failed",
+      "sealed",
+      "andy",
+      "alice",
+      "faceless",
+      "chimera",
       "clear"
     ],
     status: [
-      "Syst\u00e8me : ancien",
+      "Systeme : ancien",
       "Site public : incomplet volontairement",
       "Candidatures : ouvertes",
       "Dossiers rates : non lies",
       "Observation : reciproque"
     ],
-    archives: [
-      "/archives/origin_report_1979.txt",
-      "/archives/patient_001_alice.txt",
-      "/archives/faceless_camera_corruption.txt",
-      "Acc\u00e8s complet refus\u00e9."
+    kalyce: [
+      "KALYCE commence apres un proces et avant son acte de naissance.",
+      "Elite medicale privee. Financement non public. Ethique consideree comme obstacle.",
+      "Les succes sont publics parce qu'ils mentent bien.",
+      "Les echecs sont caches parce qu'ils repondent."
+    ],
+    isen: [
+      "Contrat presente : medecine cellulaire, mini-robots, guerison.",
+      "Contrat reel : locaux disponibles la nuit, rumeurs deja neutralisees.",
+      "Collaboration suspendue apres incidents. KALYCE quitte les lieux sans explication."
+    ],
+    daughter: [
+      "Patiente 001 : fille du medecin.",
+      "Statut tribunal : victime.",
+      "Statut KALYCE : premier succes.",
+      "Statut interne : deesse / terme non valide / entree raturee."
     ],
     application: [
       "Formulaire actif : apply.html",
       "Aucun envoi reseau.",
-      "Les candidats sont retenus localement, puis oublies officiellement."
-    ],
-    camera: [
-      "CAM_03 : mouvement non attribu\u00e9.",
-      "CAM_06 : le mannequin n'\u00e9tait pas l\u00e0 hier.",
-      "CAM_08 : signal interrompu."
-    ],
-    entity: [
-      "Entr\u00e9es ratees : andy, alice, faceless, chimera.",
-      "Index cache : entities.html",
-      "Ne pas ouvrir seul."
+      "Les candidats sont retenus localement, puis oublies officiellement.",
+      "Poste : surveillance nocturne ISEN, 00:00-06:00."
     ],
     failed: [
       "4 experiences ratees conservees.",
       "Chemin local : /entities.html",
+      "Source : carnet oublie apres depart de KALYCE.",
       "La page ne figure pas dans la navigation. C'est intentionnel."
     ],
+    sealed: [
+      "THE SEALED ONE",
+      "Entree : [REDACTED]",
+      "Origine : apres les quatre / avant la fille / erreur de classement",
+      "Contre-mesure : [REDACTED]",
+      "Instruction : ne pas completer le dossier."
+    ],
+    entity: [
+      "Entrees ratees : andy, alice, faceless, chimera.",
+      "Index cache : entities.html",
+      "Ne pas ouvrir seul."
+    ],
     andy: [
-      "ANDY r\u00e9pond \u00e0 la diffusion sonore.",
-      "ANDY ne comprend pas la distance."
+      "ANDY : diffusion sonore immediate.",
+      "Sonnerie d'ecole acceptee.",
+      "Ne pas remplacer la sonnerie par une voix humaine."
     ],
     alice: [
-      "ALICE doit \u00eatre observ\u00e9e.",
-      "ALICE observe aussi."
+      "ALICE doit etre observee toutes les 120 secondes.",
+      "ALICE observe aussi.",
+      "Si elle est trop proche, replacez le mannequin. Ne lui tournez pas le dos."
     ],
     faceless: [
-      "Aucun visage d\u00e9tect\u00e9.",
-      "Aucun visage requis."
+      "Aucun visage detecte.",
+      "Changer de camera immediatement.",
+      "Regard prolonge : corruption du flux et redemarrage requis."
     ],
     chimera: [
-      "Mouvement principal interdit.",
-      "La proximit\u00e9 annule la proc\u00e9dure."
-    ],
-    kalyce: [
-      "KALYCE commence avant son acte de naissance.",
-      "Les succes sont publics parce qu'ils mentent bien.",
-      "Les echecs sont caches parce qu'ils repondent."
+      "CHIMERA approche depuis l'ecran principal.",
+      "Eteindre PC. Couper lumieres. Se cacher sous le bureau.",
+      "Aucun mouvement ne doit etre detecte."
     ],
     deviance: [
       "Nom de protocole reconnu.",
-      "R\u00e9v\u00e9lation programm\u00e9e au JOUR J."
+      "DEVIANCE n'est pas un titre. C'est un protocole."
     ]
   };
 
@@ -96,8 +116,9 @@
     }
 
     append([
-      "Connexion locale : KSD-OBS-06",
-      "Tapez help."
+      "Connexion locale : KSD-MIRROR-51",
+      "Tapez help.",
+      "Les commandes visibles ne sont pas les seules commandes."
     ], "system");
 
     form.addEventListener("submit", (event) => {
@@ -110,7 +131,7 @@
         log.innerHTML = "";
         return;
       }
-      append(responses[command] || ["Commande inconnue.", "Le syst\u00e8me ne reconna\u00eet pas cette pr\u00e9sence."], responses[command] ? "system" : "error");
+      append(responses[command] || ["Commande inconnue.", "Le systeme ne reconnait pas cette presence."], responses[command] ? "system" : "error");
     });
 
     if (close) {
