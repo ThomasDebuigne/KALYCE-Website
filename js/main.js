@@ -4,6 +4,16 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  function forceScrollTop() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
   function readList(key) {
     try {
       return JSON.parse(localStorage.getItem(key) || "[]");
@@ -81,7 +91,7 @@
       node.textContent = "Le service commence maintenant.";
       return;
     }
-    node.textContent = `D\u00e9but du service dans : ${parts.days} jours ${pad(parts.hours)} heures ${pad(parts.minutes)} minutes`;
+    node.textContent = `Début du service dans : ${parts.days} jours ${pad(parts.hours)} heures ${pad(parts.minutes)} minutes`;
   }
 
   function showSystemDialog(title, message) {
@@ -112,7 +122,7 @@
       link.addEventListener("click", (event) => {
         if (hasCameraAccess()) return;
         event.preventDefault();
-        showSystemDialog("ACC\u00c8S REFUS\u00c9", "Candidature incompl\u00e8te. Niveau d'acc\u00e8s insuffisant.");
+        showSystemDialog("ACCÈS REFUSÉ", "Candidature incomplète. Niveau d'accès insuffisant.");
       });
     });
   }
@@ -121,11 +131,11 @@
     const node = $("[data-home-random-warning]");
     if (!node) return;
     const warnings = [
-      "Le contact visuel doit \u00eatre maintenu.",
-      "Le mannequin n'\u00e9tait pas l\u00e0 hier.",
-      "Le signal ne vient pas de la cam\u00e9ra.",
-      "Si vous l'entendez, ne r\u00e9pondez pas.",
-      "KALYCE d\u00e9cline toute responsabilit\u00e9."
+      "Le contact visuel doit être maintenu.",
+      "Le mannequin n'était pas là hier.",
+      "Le signal ne vient pas de la caméra.",
+      "Si vous l'entendez, ne répondez pas.",
+      "KALYCE décline toute responsabilité."
     ];
     let index = 0;
     setInterval(() => {
@@ -161,7 +171,7 @@
       form.hidden = true;
       accepted.hidden = false;
       if (tempNode) tempNode.textContent = generatedId;
-      showSystemDialog("CANDIDATURE ACCEPT\u00c9E", "Niveau d'acc\u00e8s : ATTENTE. Votre dossier a ete ajoute.");
+      showSystemDialog("CANDIDATURE ACCEPTÉE", "Niveau d'accès : ATTENTE. Votre dossier a ete ajoute.");
     });
   }
 
@@ -180,7 +190,7 @@
         listNode.innerHTML = archives.map((archive) => `
           <button class="archive-row" type="button" data-archive-id="${archive.id}">
             <span>${escapeHtml(archive.path)}</span>
-            <span class="archive-state">${read.includes(archive.id) ? "CONSULT\u00c9" : archive.clearance}</span>
+            <span class="archive-state">${read.includes(archive.id) ? "CONSULTÉ" : archive.clearance}</span>
           </button>
         `).join("");
 
@@ -198,7 +208,7 @@
           modal.showModal();
 
           const state = $(".archive-state", row);
-          if (state) state.textContent = "CONSULT\u00c9";
+          if (state) state.textContent = "CONSULTÉ";
         });
       })
       .catch(() => {
@@ -218,7 +228,7 @@
           <article class="entity-card" data-entity="${escapeHtml(entity.id)}">
             <div class="entity-visual" aria-hidden="true"></div>
             <div>
-              <div class="system-label">ENTIT\u00c9 : ${escapeHtml(entity.name)}</div>
+              <div class="system-label">ENTITÉ : ${escapeHtml(entity.name)}</div>
               <h2>${escapeHtml(entity.name)}</h2>
               <ul class="entity-facts">
                 <li><strong>Classe :</strong> ${escapeHtml(entity.classification)}</li>
@@ -226,7 +236,7 @@
                 <li><strong>Zone :</strong> ${escapeHtml(entity.zone)}</li>
                 <li><strong>Comportement :</strong> ${escapeHtml(entity.behavior)}</li>
                 ${entity.failure ? `<li><strong>Echec :</strong> ${escapeHtml(entity.failure)}</li>` : ""}
-                ${entity.lastSeen ? `<li><strong>Derni&egrave;re preuve :</strong> ${escapeHtml(entity.lastSeen)}</li>` : ""}
+                ${entity.lastSeen ? `<li><strong>Dernière preuve :</strong> ${escapeHtml(entity.lastSeen)}</li>` : ""}
                 <li><strong>Contre-mesure :</strong> ${escapeHtml(entity.countermeasure)}</li>
                 <li><strong>Instruction :</strong> ${escapeHtml(entity.instruction || entity.note)}</li>
               </ul>
@@ -259,7 +269,7 @@
       });
       listNode.innerHTML = visible.map((item) => {
         const locked = isLocked(item);
-        const copy = locked ? "ENTR\u00c9E VERROUILL\u00c9E / D\u00c9CLASSIFICATION DIFF\u00c9R\u00c9E" : item.copy;
+        const copy = locked ? "ENTRÉE VERROUILLÉE / DÉCLASSIFICATION DIFFÉRÉE" : item.copy;
         const meta = locked ? `LOCK ${item.lockedUntil.slice(0, 10)}` : item.status;
         return `
           <article class="incident-row ${locked ? "locked" : ""}">
@@ -305,7 +315,7 @@
       localStorage.setItem(keys.audioEnabled, enabled ? "true" : "false");
       buttons.forEach((button) => {
         button.classList.toggle("enabled", enabled);
-        button.textContent = enabled ? "AUDIO ACTIV\u00c9" : "ACTIVER L'AUDIO";
+        button.textContent = enabled ? "AUDIO ACTIVÉ" : "ACTIVER L'AUDIO";
       });
     };
     setState(localStorage.getItem(keys.audioEnabled) === "true");
@@ -327,6 +337,7 @@
   };
 
   document.addEventListener("DOMContentLoaded", () => {
+    forceScrollTop();
     initNavigation();
     initHomeWarnings();
     initApplicationForm();
@@ -339,5 +350,11 @@
     updateCompactCountdown();
     setInterval(updateClocks, 1000);
     setInterval(updateCompactCountdown, 1000);
+  });
+
+  window.addEventListener("load", () => {
+    forceScrollTop();
+    setTimeout(forceScrollTop, 50);
+    setTimeout(forceScrollTop, 150);
   });
 })();
