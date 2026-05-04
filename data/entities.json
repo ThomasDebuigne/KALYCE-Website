@@ -1,0 +1,42 @@
+[
+  {
+    "id": "andy",
+    "name": "ANDY",
+    "classification": "instable",
+    "morphology": "disproportionn\u00e9e",
+    "zone": "cam\u00e9ras internes",
+    "behavior": "enfantin, impr\u00e9visible",
+    "countermeasure": "diffusion sonore imm\u00e9diate",
+    "note": "ne pas engager de contact prolong\u00e9"
+  },
+  {
+    "id": "alice",
+    "name": "ALICE",
+    "classification": "observationnelle",
+    "morphology": "mannequin humano\u00efde",
+    "zone": "bureau de s\u00e9curit\u00e9",
+    "behavior": "d\u00e9placement progressif hors observation",
+    "countermeasure": "contact visuel r\u00e9gulier",
+    "note": "si ALICE est trop proche, replacer manuellement le sujet"
+  },
+  {
+    "id": "faceless",
+    "name": "FACELESS",
+    "classification": "r\u00e9seau / perception",
+    "morphology": "humano\u00efde sans visage",
+    "zone": "flux cam\u00e9ra",
+    "behavior": "fixation visuelle, corruption du syst\u00e8me",
+    "countermeasure": "changer imm\u00e9diatement de cam\u00e9ra",
+    "note": "ne jamais regarder plus de quelques secondes"
+  },
+  {
+    "id": "chimera",
+    "name": "CHIMERA",
+    "classification": "pr\u00e9datrice",
+    "morphology": "animale / composite",
+    "zone": "\u00e9cran principal",
+    "behavior": "approche progressive",
+    "countermeasure": "extinction des syst\u00e8mes, dissimulation",
+    "note": "aucun mouvement ne doit \u00eatre d\u00e9tect\u00e9"
+  }
+]

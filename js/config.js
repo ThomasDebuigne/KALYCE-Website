@@ -1,0 +1,25 @@
+(function () {
+  window.KSD_CONFIG = {
+    build: "KSD-1979.06",
+    releaseDate: "2026-06-01T20:00:00",
+    links: {
+      download: "#",
+      trailer: "#",
+      cameras: "cameras.html"
+    },
+    storage: {
+      access: "ksd_access",
+      applicationSubmitted: "ksd_application_submitted",
+      tempId: "ksd_temp_id",
+      archivesRead: "ksd_archives_read",
+      terminalFound: "ksd_terminal_found",
+      entitiesDiscovered: "ksd_entities_discovered",
+      audioEnabled: "ksd_audio_enabled"
+    },
+    audioTracks: {
+      cameraBed: "assets/sounds/camera-bed.mp3",
+      glitch: "assets/sounds/glitch.mp3",
+      systemBeep: "assets/sounds/system-beep.mp3"
+    }
+  };
+})();

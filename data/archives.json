@@ -1,0 +1,106 @@
+[
+  {
+    "id": "origin_report_1979",
+    "path": "/archives/origin_report_1979.txt",
+    "title": "RAPPORT INTERNE - ORIGINE 1979",
+    "clearance": "PARTIEL",
+    "body": [
+      "RAPPORT INTERNE - KALYCE",
+      "Sujet : Collaboration temporaire avec \u00e9tablissement partenaire.",
+      "Statut : interrompu.",
+      "Motif officiel : divergence contractuelle.",
+      "Motif r\u00e9el : \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+      "Les \u00e9v\u00e9nements observ\u00e9s dans les salles de surveillance ne doivent pas \u00eatre communiqu\u00e9s au personnel civil."
+    ]
+  },
+  {
+    "id": "patient_001_alice",
+    "path": "/archives/patient_001_alice.txt",
+    "title": "PATIENT 001 / ALICE",
+    "clearance": "OBSERVATION",
+    "body": [
+      "Dossier sujet : ALICE.",
+      "Morphologie externe stabilis\u00e9e. R\u00e9action au contact visuel maintenue.",
+      "Le sujet se d\u00e9place lorsque le personnel d\u00e9clare avoir clign\u00e9 des yeux.",
+      "Note : le mannequin n'\u00e9tait pas l\u00e0 hier.",
+      "Proc\u00e9dure : replacer manuellement le sujet si distance inf\u00e9rieure \u00e0 \u2588\u2588 m\u00e8tres."
+    ]
+  },
+  {
+    "id": "entity_andy",
+    "path": "/archives/entity_andy.txt",
+    "title": "ENTITY / ANDY",
+    "clearance": "SONORE",
+    "body": [
+      "ANDY r\u00e9pond aux fr\u00e9quences diffus\u00e9es depuis le poste de s\u00e9curit\u00e9.",
+      "La forme est jug\u00e9e disproportionn\u00e9e mais non hostile avant 02:00.",
+      "Aucun agent ne doit imiter la voix entendue dans les conduits.",
+      "Si vous l'entendez, ne r\u00e9pondez pas."
+    ]
+  },
+  {
+    "id": "faceless_camera_corruption",
+    "path": "/archives/faceless_camera_corruption.txt",
+    "title": "FACELESS / CORRUPTION CAMERA",
+    "clearance": "RESTREINT",
+    "body": [
+      "Aucun visage d\u00e9tect\u00e9.",
+      "La corruption ne provient pas du capteur.",
+      "Les agents expos\u00e9s plus de quelques secondes d\u00e9clarent voir leur propre poste depuis le couloir.",
+      "Le syst\u00e8me ne reconna\u00eet pas cette pr\u00e9sence.",
+      "\u2588\u2588\u2588\u2588\u2588 doit rester hors champ."
+    ]
+  },
+  {
+    "id": "chimera_proximity_event",
+    "path": "/archives/chimera_proximity_event.txt",
+    "title": "CHIMERA / PROXIMITY EVENT",
+    "clearance": "NON RESOLU",
+    "body": [
+      "L'approche commence sans son.",
+      "Les mouvements rapides aggravent l'\u00e9v\u00e9nement.",
+      "Extinction temporaire des syst\u00e8mes recommand\u00e9e.",
+      "La proximit\u00e9 annule la proc\u00e9dure si l'agent respire trop fort."
+    ]
+  },
+  {
+    "id": "sealed_one_restricted",
+    "path": "/archives/sealed_one_restricted.txt",
+    "title": "THE SEALED ONE",
+    "clearance": "SCELLE",
+    "body": [
+      "Ouverture refus\u00e9e.",
+      "Le document existe uniquement pour prouver que le document n'existe pas.",
+      "Toute demande de consultation vaut acceptation de \u2588\u2588\u2588\u2588\u2588\u2588.",
+      "DEVIANCE n'est pas un titre. C'est un protocole."
+    ]
+  },
+  {
+    "id": "isen_contract",
+    "path": "/archives/isen_collaboration_contract_redacted.pdf",
+    "title": "CONTRAT COLLABORATION / REDACTED",
+    "clearance": "PDF",
+    "body": [
+      "Partie A : KALYCE.",
+      "Partie B : \u00e9tablissement partenaire.",
+      "Dur\u00e9e initiale : \u2588\u2588 semaines.",
+      "Clause 9 : KALYCE d\u00e9cline toute responsabilit\u00e9 en cas de perception prolong\u00e9e.",
+      "Clause 12 : suspension imm\u00e9diate si le protocole DEVIANCE est nomm\u00e9 par un civil."
+    ]
+  },
+  {
+    "id": "night_shift_protocol",
+    "path": "/archives/night_shift_protocol.json",
+    "title": "NIGHT SHIFT PROTOCOL",
+    "clearance": "JSON",
+    "body": [
+      "{",
+      "  \"shift\": \"00:00-06:00\",",
+      "  \"camera_lock\": true,",
+      "  \"report_unknown_presence\": false,",
+      "  \"leave_post\": false,",
+      "  \"morning_survival\": \"pending\"",
+      "}"
+    ]
+  }
+]

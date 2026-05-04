@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incident Log / KSD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
+    <script src="js/terminal.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body data-page="incidents">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">KALYCE SECURITY DIVISION</a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <a href="apply.html" data-nav="apply">Candidature</a>
+          <a href="cameras.html" data-nav="cameras" data-camera-link>Cam&eacute;ras</a>
+          <a href="archives.html" data-nav="archives">Archives</a>
+          <a href="entities.html" data-nav="entities">Entit&eacute;s</a>
+          <a href="incidents.html" data-nav="incidents">Incidents</a>
+          <a href="countdown.html" data-nav="countdown">Prise de poste</a>
+        </nav>
+        <button class="audio-toggle" type="button" data-audio-toggle>ACTIVER L'AUDIO</button>
+      </header>
+
+      <main class="page-layout">
+        <section class="page-heading">
+          <div class="system-label">TIMELINE INCIDENTS / POSTE 00:00-06:00</div>
+          <h1>INCIDENT LOG</h1>
+          <p>Les anomalies non reconnues ne doivent pas &ecirc;tre signal&eacute;es.</p>
+        </section>
+
+        <section class="filters" data-incident-filters aria-label="Filtres incidents">
+          <button class="filter active" type="button" data-filter="all">Tous</button>
+          <button class="filter" type="button" data-filter="cameras">Cam&eacute;ras</button>
+          <button class="filter" type="button" data-filter="sounds">Sons</button>
+          <button class="filter" type="button" data-filter="entities">Entit&eacute;s</button>
+          <button class="filter" type="button" data-filter="kalyce">KALYCE</button>
+          <button class="filter" type="button" data-filter="unresolved">Non r&eacute;solus</button>
+        </section>
+
+        <section class="incident-timeline" data-incident-list aria-live="polite"></section>
+      </main>
+
+      <footer class="site-footer">
+        <span>KSD intranet build <span data-build-number>--</span></span>
+        <button type="button" class="footer-link" data-open-terminal>maintenance</button>
+      </footer>
+    </div>
+  </body>
+</html>

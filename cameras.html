@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camera Interface / KSD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
+    <script src="js/terminal.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/cameras.js" defer></script>
+  </head>
+  <body data-page="cameras">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">KALYCE SECURITY DIVISION</a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <a href="apply.html" data-nav="apply">Candidature</a>
+          <a href="cameras.html" data-nav="cameras" data-camera-link>Cam&eacute;ras</a>
+          <a href="archives.html" data-nav="archives">Archives</a>
+          <a href="entities.html" data-nav="entities">Entit&eacute;s</a>
+          <a href="incidents.html" data-nav="incidents">Incidents</a>
+          <a href="countdown.html" data-nav="countdown">Prise de poste</a>
+        </nav>
+        <button class="audio-toggle" type="button" data-audio-toggle>ACTIVER L'AUDIO</button>
+      </header>
+
+      <main class="camera-console">
+        <section class="page-heading compact">
+          <div class="system-label">SURVEILLANCE ACTIVE / ACC&Egrave;S RESTREINT</div>
+          <h1>INTERFACE CAM&Eacute;RAS</h1>
+          <p>Ne quittez pas les cam&eacute;ras. Le signal ne vient pas de la cam&eacute;ra.</p>
+        </section>
+
+        <section class="access-denied-panel" data-camera-locked hidden>
+          <h2>ACC&Egrave;S REFUS&Eacute;</h2>
+          <p>Candidature incompl&egrave;te. Niveau d'acc&egrave;s insuffisant.</p>
+          <a class="button primary" href="apply.html">POSTULER</a>
+        </section>
+
+        <section class="monitor-layout" data-camera-unlocked hidden>
+          <div class="main-monitor" data-main-camera>
+            <div class="feed-overlay">
+              <span class="rec-dot">REC</span>
+              <span data-selected-camera>CAM_01 / ATRIUM</span>
+              <span data-live-clock>--:--:--</span>
+            </div>
+            <div class="main-feed-visual">
+              <span class="main-silhouette"></span>
+              <span class="signal-copy" data-camera-signal>SIGNAL STABLE</span>
+            </div>
+            <button class="button danger report-button" type="button" data-report-anomaly>SIGNALER ANOMALIE</button>
+          </div>
+
+          <aside class="camera-side">
+            <div class="status-panel">
+              <div class="panel-header">
+                <span>INT&Eacute;GRIT&Eacute; DU SYST&Egrave;ME CAM&Eacute;RA</span>
+                <strong data-camera-integrity>100%</strong>
+              </div>
+              <div class="integrity-meter"><span data-camera-integrity-bar></span></div>
+              <p data-camera-message>Flux cam&eacute;ra : partiellement corrompu.</p>
+            </div>
+            <div class="camera-grid" data-camera-grid></div>
+          </aside>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>KSD intranet build <span data-build-number>--</span></span>
+        <button type="button" class="footer-link" data-open-terminal>maintenance</button>
+      </footer>
+    </div>
+  </body>
+</html>

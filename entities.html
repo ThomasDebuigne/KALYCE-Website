@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dossiers des entites / KSD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
+    <script src="js/terminal.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body data-page="entities">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">KALYCE SECURITY DIVISION</a>
+        <nav class="main-nav" aria-label="Navigation principale">
+          <a href="apply.html" data-nav="apply">Candidature</a>
+          <a href="cameras.html" data-nav="cameras" data-camera-link>Cam&eacute;ras</a>
+          <a href="archives.html" data-nav="archives">Archives</a>
+          <a href="entities.html" data-nav="entities">Entit&eacute;s</a>
+          <a href="incidents.html" data-nav="incidents">Incidents</a>
+          <a href="countdown.html" data-nav="countdown">Prise de poste</a>
+        </nav>
+        <button class="audio-toggle" type="button" data-audio-toggle>ACTIVER L'AUDIO</button>
+      </header>
+
+      <main class="page-layout">
+        <section class="page-heading">
+          <div class="system-label">DOSSIERS D'ENTIT&Eacute;S / EXTRAITS NON VALID&Eacute;S</div>
+          <h1>DOSSIERS DES ENTIT&Eacute;S</h1>
+          <p>Ne pas engager de contact prolong&eacute;. Aucun visage d&eacute;tect&eacute;.</p>
+        </section>
+
+        <section class="entity-grid" data-entity-list aria-live="polite"></section>
+      </main>
+
+      <footer class="site-footer">
+        <span>KSD intranet build <span data-build-number>--</span></span>
+        <button type="button" class="footer-link" data-open-terminal>maintenance</button>
+      </footer>
+    </div>
+  </body>
+</html>

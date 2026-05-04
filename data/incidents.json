@@ -1,0 +1,74 @@
+[
+  {
+    "time": "00:42",
+    "category": "sounds",
+    "copy": "Bruit haute fr\u00e9quence d\u00e9tect\u00e9 dans le couloir Nord.",
+    "status": "SON",
+    "unresolved": false
+  },
+  {
+    "time": "01:13",
+    "category": "cameras",
+    "copy": "CAM_03 : mouvement non attribu\u00e9.",
+    "status": "CAMERA",
+    "unresolved": true
+  },
+  {
+    "time": "01:44",
+    "category": "entities",
+    "copy": "Le mannequin du bureau a chang\u00e9 d'orientation.",
+    "status": "ALICE",
+    "unresolved": true
+  },
+  {
+    "time": "02:07",
+    "category": "cameras",
+    "copy": "Un agent affirme avoir vu son propre dos sur CAM_06.",
+    "status": "CAMERA",
+    "unresolved": true
+  },
+  {
+    "time": "02:51",
+    "category": "cameras",
+    "copy": "CAM_04 inutilisable pendant 43 secondes.",
+    "status": "CAMERA",
+    "unresolved": false
+  },
+  {
+    "time": "03:18",
+    "category": "entities",
+    "copy": "Forme animale aper\u00e7ue sur \u00e9cran secondaire.",
+    "status": "CHIMERA",
+    "unresolved": true,
+    "lockedUntil": "2026-05-12T00:00:00"
+  },
+  {
+    "time": "03:39",
+    "category": "sounds",
+    "copy": "Signal sonore diffus\u00e9 sans commande utilisateur.",
+    "status": "SON",
+    "unresolved": true
+  },
+  {
+    "time": "04:06",
+    "category": "kalyce",
+    "copy": "Contrat KALYCE suspendu.",
+    "status": "KALYCE",
+    "unresolved": false
+  },
+  {
+    "time": "04:11",
+    "category": "kalyce",
+    "copy": "Carnet retrouv\u00e9 dans une salle verrouill\u00e9e.",
+    "status": "ARCHIVE",
+    "unresolved": true,
+    "lockedUntil": "2026-05-20T00:00:00"
+  },
+  {
+    "time": "05:32",
+    "category": "kalyce",
+    "copy": "Dernier rapport de l'agent supprim\u00e9.",
+    "status": "SUPPRIME",
+    "unresolved": true
+  }
+]
