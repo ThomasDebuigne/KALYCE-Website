@@ -144,6 +144,192 @@
     }, 5200);
   }
 
+  function initRecruitmentPopups() {
+    if (document.body.dataset.page !== "home") return;
+
+    const container = $(".recruitment-popups");
+    if (!container) return;
+
+    const messages = [
+      {
+        title: "KALYCE RECRUTE",
+        strong: "Votre profil a été remarqué.",
+        text: "Vous lisez encore. C'est déjà une forme de consentement opérationnel."
+      },
+      {
+        title: "TRANSMISSION PRIORITAIRE",
+        strong: "Accès civil encore ouvert.",
+        text: "La forme actuelle fatigue. Les sujets lucides sont invités à se présenter."
+      },
+      {
+        title: "DOSSIER EN ATTENTE",
+        strong: "Une main discrète manque.",
+        text: "KALYCE ne cherche pas des employés. KALYCE reconnaît les témoins utiles."
+      },
+      {
+        title: "CORRECTION HUMAINE",
+        strong: "Ne détournez pas le regard.",
+        text: "Si l'ancien monde vous paraît déjà dépassé, l'ouverture vous concerne."
+      },
+      {
+        title: "APPEL DE CELLULE",
+        strong: "Votre hésitation est enregistrée.",
+        text: "Les esprits capables de participer à la reprise seront contactés en priorité."
+      },
+      {
+        title: "NIVEAU D'ACCÈS : CANDIDAT",
+        strong: "Vous êtes encore à l'extérieur.",
+        text: "Déposez une candidature avant fermeture du canal civil."
+      },
+      {
+        title: "SIGNAL PERSISTANT",
+        strong: "La fenêtre revient toujours.",
+        text: "Fermer le message ne ferme pas le besoin. KALYCE continue d'observer."
+      },
+      {
+        title: "RECRUTEMENT ACTIF",
+        strong: "Canal civil instable.",
+        text: "Les candidatures silencieuses seront traitées avant les autres."
+      }
+    ];
+
+    const desktopPositions = [
+      { top: "72px", left: "22px" },
+      { top: "96px", right: "26px" },
+      { bottom: "26px", left: "32px" },
+      { bottom: "34px", right: "28px" },
+
+      { top: "24%", left: "12%" },
+      { top: "28%", right: "13%" },
+      { top: "40%", left: "34%" },
+      { top: "46%", right: "31%" },
+      { top: "55%", left: "18%" },
+      { top: "58%", right: "16%" },
+
+      { top: "36%", left: "50%", transform: "translateX(-50%)" },
+      { top: "50%", left: "50%", transform: "translate(-50%, -50%)" },
+      { top: "66%", left: "50%", transform: "translateX(-50%)" }
+    ];
+
+    const mobilePositions = [
+      { top: "92px", left: "9px" },
+      { bottom: "22px", left: "9px" },
+      { top: "42%", left: "9px" }
+    ];
+
+    let messageIndex = 0;
+    let popupCount = 0;
+    let popupTimer = null;
+
+    function isMobile() {
+      return window.matchMedia("(max-width: 700px)").matches;
+    }
+
+    function getMaxVisiblePopups() {
+      return isMobile() ? 2 : 12;
+    }
+
+    function getPopupInterval() {
+      return isMobile() ? 10000 : 5000;
+    }
+
+    function getPopupLifetime() {
+      return isMobile() ? 8200 : 24000;
+    }
+
+    function getPositions() {
+      return isMobile() ? mobilePositions : desktopPositions;
+    }
+
+    function removePopup(popup) {
+      if (!popup || popup.classList.contains("exiting")) return;
+      popup.classList.add("exiting");
+      setTimeout(() => {
+        popup.remove();
+      }, 220);
+    }
+
+    function limitVisiblePopups() {
+      const visiblePopups = $$(".recruitment-popup", container).filter((item) => !item.classList.contains("exiting"));
+      const maxVisiblePopups = getMaxVisiblePopups();
+
+      while (visiblePopups.length > maxVisiblePopups) {
+        removePopup(visiblePopups.shift());
+      }
+    }
+
+    function applyPosition(popup, position) {
+      popup.style.top = "";
+      popup.style.right = "";
+      popup.style.bottom = "";
+      popup.style.left = "";
+      popup.style.transform = "";
+
+      Object.entries(position).forEach(([key, value]) => {
+        popup.style[key] = value;
+      });
+    }
+
+    function createRecruitmentPopup() {
+      const message = messages[messageIndex % messages.length];
+      const positions = getPositions();
+      const position = positions[popupCount % positions.length];
+
+      messageIndex += 1;
+      popupCount += 1;
+
+      const popup = document.createElement("aside");
+      popup.className = "recruitment-popup";
+      popup.setAttribute("role", "status");
+
+      applyPosition(popup, position);
+
+      popup.innerHTML = `
+        <div class="recruitment-popup-titlebar">
+          <span>${escapeHtml(message.title)}</span>
+          <button class="recruitment-popup-close" type="button" aria-label="Fermer">X</button>
+        </div>
+
+        <div class="recruitment-popup-body">
+          <strong>${escapeHtml(message.strong)}</strong>
+          <p>${escapeHtml(message.text)}</p>
+
+          <div class="recruitment-popup-actions">
+            <a href="apply.html">Candidature</a>
+            <button type="button" data-popup-dismiss>Ignorer</button>
+          </div>
+        </div>
+      `;
+
+      container.append(popup);
+      limitVisiblePopups();
+
+      $(".recruitment-popup-close", popup).addEventListener("click", () => removePopup(popup));
+      $("[data-popup-dismiss]", popup).addEventListener("click", () => removePopup(popup));
+
+      setTimeout(() => {
+        removePopup(popup);
+      }, getPopupLifetime());
+    }
+
+    function restartPopupTimer() {
+      if (popupTimer) {
+        clearInterval(popupTimer);
+      }
+
+      popupTimer = setInterval(createRecruitmentPopup, getPopupInterval());
+      limitVisiblePopups();
+    }
+
+    setTimeout(createRecruitmentPopup, 2200);
+    restartPopupTimer();
+
+    window.addEventListener("resize", () => {
+      limitVisiblePopups();
+      restartPopupTimer();
+    });
+  }
+
   function initApplicationForm() {
     const form = $("[data-application-form]");
     const accepted = $("[data-accepted-screen]");
@@ -340,6 +526,7 @@
     forceScrollTop();
     initNavigation();
     initHomeWarnings();
+    initRecruitmentPopups();
     initApplicationForm();
     initArchives();
     initEntities();

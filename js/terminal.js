@@ -4,88 +4,116 @@
       "Commandes disponibles :",
       "status",
       "kalyce",
-      "isen",
-      "daughter",
       "application",
       "failed",
       "sealed",
-      "andy",
-      "alice",
-      "faceless",
-      "chimera",
+      "deviance",
+      "67",
       "clear"
     ],
+
     status: [
       "Systeme : ancien",
-      "Site public : incomplet volontairement",
-      "Candidatures : ouvertes",
-      "Dossiers rates : non lies",
-      "Observation : reciproque"
+      "Interface publique : volontairement limitee",
+      "Acces profond : verrouille",
+      "Archives : incompletes",
+      "Observation : active",
+      "Derniere synchronisation : inconnue"
     ],
+
     kalyce: [
-      "KALYCE commence apres un proces et avant son acte de naissance.",
-      "Elite medicale privee. Financement non public. Ethique consideree comme obstacle.",
-      "Les succes sont publics parce qu'ils mentent bien.",
-      "Les echecs sont caches parce qu'ils repondent."
+      "KALYCE n'est pas nee d'une promesse.",
+      "Elle est apparue dans les marges d'un dossier judiciaire.",
+      "Recherche privee. Financement discret. Resultats presentes avant verification.",
+      "Les rapports publics parlent de progres.",
+      "Les rapports internes parlent moins."
     ],
-    isen: [
-      "Contrat presente : medecine cellulaire, mini-robots, guerison.",
-      "Contrat reel : locaux disponibles la nuit, rumeurs deja neutralisees.",
-      "Collaboration suspendue apres incidents. KALYCE quitte les lieux sans explication."
-    ],
-    daughter: [
-      "Patiente 001 : fille du medecin.",
-      "Statut tribunal : victime.",
-      "Statut KALYCE : premier succes.",
-      "Statut interne : deesse / terme non valide / entree raturee."
-    ],
+
     application: [
       "Formulaire actif : apply.html",
-      "Aucun envoi reseau.",
-      "Les candidats sont retenus localement, puis oublies officiellement.",
-      "Poste : surveillance nocturne ISEN, 00:00-06:00."
+      "Transmission reseau : aucune",
+      "Les candidatures sont enregistrees localement.",
+      "Poste propose : surveillance nocturne, 00:00-06:00.",
+      "Experience requise : rester calme lorsque les consignes changent seules."
     ],
+
     failed: [
-      "4 experiences ratees conservees.",
-      "Chemin local : /entities.html",
-      "Source : carnet oublie apres depart de KALYCE.",
-      "La page ne figure pas dans la navigation. C'est intentionnel."
+      "Dossiers incomplets detectes.",
+      "Nombre exact : non affiche",
+      "Index local : /entities.html",
+      "Statut : archive non referencee",
+      "Certaines erreurs ont continue apres leur cloture."
     ],
+
     sealed: [
-      "THE SEALED ONE",
-      "Entree : [REDACTED]",
-      "Origine : apres les quatre / avant la fille / erreur de classement",
-      "Contre-mesure : [REDACTED]",
-      "Instruction : ne pas completer le dossier."
+      "DOSSIER SCELLE",
+      "Nom : [SUPPRIME]",
+      "Origine : incoherente",
+      "Classement : erreur persistante",
+      "Acces refuse.",
+      "Instruction : ne pas completer ce qui manque."
     ],
-    entity: [
-      "Entrees ratees : andy, alice, faceless, chimera.",
-      "Index cache : entities.html",
-      "Ne pas ouvrir seul."
-    ],
-    andy: [
-      "ANDY : diffusion sonore immediate.",
-      "Sonnerie d'ecole acceptee.",
-      "Ne pas remplacer la sonnerie par une voix humaine."
-    ],
-    alice: [
-      "ALICE doit etre observee toutes les 120 secondes.",
-      "ALICE observe aussi.",
-      "Si elle est trop proche, replacez le mannequin. Ne lui tournez pas le dos."
-    ],
-    faceless: [
-      "Aucun visage detecte.",
-      "Changer de camera immediatement.",
-      "Regard prolonge : corruption du flux et redemarrage requis."
-    ],
-    chimera: [
-      "CHIMERA approche depuis l'ecran principal.",
-      "Eteindre PC. Couper lumieres. Se cacher sous le bureau.",
-      "Aucun mouvement ne doit etre detecte."
-    ],
+
     deviance: [
-      "Nom de protocole reconnu.",
-      "DEVIANCE n'est pas un titre. C'est un protocole."
+      "Protocole reconnu.",
+      "DEVIANCE n'est pas un surnom.",
+      "DEVIANCE n'est pas un projet public.",
+      "DEVIANCE commence quand l'observation cesse d'etre passive.",
+      "Etat : dormant / instable / attendu"
+    ],
+
+    entity: [
+      "Terme invalide dans cette interface.",
+      "Les entrees individuelles ne sont pas disponibles.",
+      "Utilisez les archives autorisees.",
+      "Ou n'utilisez rien."
+    ],
+
+    andy: [
+      "Entree retrouvee : ANDY.",
+      "Petite silhouette. Trop immobile hors champ.",
+      "Elle suit ce qui fait du bruit.",
+      "Ne laissez pas le silence choisir a votre place."
+    ],
+
+    alice: [
+      "Entree retrouvee : ALICE.",
+      "Posture de mannequin. Distance instable.",
+      "Elle bouge surtout quand personne ne confirme sa position.",
+      "Les controles trop espacés aggravent les erreurs."
+    ],
+
+    faceless: [
+      "Entree retrouvee : FACELESS.",
+      "Taille humaine. Aucun visage exploitable.",
+      "L'image se degrade quand on insiste.",
+      "Certaines presences doivent seulement etre evitees."
+    ],
+
+    chimera: [
+      "Entree retrouvee : CHIMERA.",
+      "Assemblage massif. Forme incoherente.",
+      "L'ecran principal semble l'attirer.",
+      "Trop de lumiere facilite son approche."
+    ],
+
+    daughter: [
+      "Entree protegee.",
+      "Patiente initiale : non nommee",
+      "Statut public : victime",
+      "Statut interne : contradiction",
+      "Aucune designation personnelle ne sera affichee."
+    ],
+
+    67: [
+      "67.",
+      "six... seven...",
+      "Commande acceptee trop vite.",
+      "Analyse annulee : le systeme a reconnu la reference.",
+      "Aucune donnee utile. Seulement un echo internet.",
+      "Rapport interne : le technicien a souffle du nez.",
+      "Ne recommence pas.",
+      "Ou recommence. Le terminal juge, mais il comprend."
     ]
   };
 
@@ -112,26 +140,39 @@
         item.textContent = line;
         log.append(item);
       });
+
       log.scrollTop = log.scrollHeight;
     }
 
     append([
       "Connexion locale : KSD-MIRROR-51",
+      "Session limitee.",
       "Tapez help.",
-      "Les commandes visibles ne sont pas les seules commandes."
+      "Les noms ne sont pas des commandes."
     ], "system");
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+
       const command = input.value.trim().toLowerCase();
       if (!command) return;
+
       append([`> ${command}`]);
       input.value = "";
+
       if (command === "clear") {
         log.innerHTML = "";
         return;
       }
-      append(responses[command] || ["Commande inconnue.", "Le systeme ne reconnait pas cette presence."], responses[command] ? "system" : "error");
+
+      append(
+        responses[command] || [
+          "Commande inconnue.",
+          "Cette requete ne correspond a aucune archive publique.",
+          "Ou elle a ete retiree avant votre arrivee."
+        ],
+        responses[command] ? "system" : "error"
+      );
     });
 
     if (close) {
@@ -144,52 +185,41 @@
     return { input };
   }
 
-  function createOverlay() {
-    const overlay = document.createElement("div");
-    overlay.className = "terminal-overlay";
-    overlay.dataset.terminalOverlay = "true";
-    overlay.innerHTML = '<section class="terminal-window" data-terminal-root></section>';
-    document.body.append(overlay);
-    const terminal = bootTerminal(overlay.querySelector("[data-terminal-root]"), { closable: true });
-
-    overlay.addEventListener("click", (event) => {
-      if (event.target === overlay) overlay.classList.remove("open");
-    });
-
-    return {
-      open() {
-        overlay.classList.add("open");
-        localStorage.setItem(window.KSD_CONFIG.storage.terminalFound, "true");
-        setTimeout(() => terminal.input.focus(), 20);
-      },
-      close() {
-        overlay.classList.remove("open");
-      }
-    };
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
+    /*
+      On garde uniquement le terminal intégré dans ton interface,
+      celui qui utilise :
+      data-terminal-screen
+
+      L'overlay automatique reste supprimé.
+    */
+
     const inline = document.querySelector("[data-terminal-screen]");
+
     if (inline) {
       bootTerminal(inline);
-      localStorage.setItem(window.KSD_CONFIG.storage.terminalFound, "true");
+
+      if (
+        window.KSD_CONFIG &&
+        window.KSD_CONFIG.storage &&
+        window.KSD_CONFIG.storage.terminalFound
+      ) {
+        localStorage.setItem(window.KSD_CONFIG.storage.terminalFound, "true");
+      }
     }
 
-    const overlay = createOverlay();
-    window.KSDTerminal = overlay;
+    // Nettoyage de sécurité : supprime un éventuel overlay déjà présent.
+    document.querySelectorAll(".terminal-overlay, [data-terminal-overlay]").forEach((element) => {
+      element.remove();
+    });
 
+    // Empêche les boutons cachés d'ouvrir un terminal overlay.
     document.querySelectorAll("[data-open-terminal]").forEach((button) => {
-      button.addEventListener("click", () => overlay.open());
+      button.removeAttribute("data-open-terminal");
     });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.altKey && event.shiftKey && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        overlay.open();
-      }
-      if (event.key === "Escape") {
-        overlay.close();
-      }
-    });
+    if (window.KSDTerminal) {
+      delete window.KSDTerminal;
+    }
   });
 })();
