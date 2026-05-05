@@ -198,6 +198,75 @@ p {
   padding: 0;
 }
 
+/* Compte à rebours principal */
+
+.main-countdown-panel {
+  margin: 18px 0;
+  padding: 28px;
+  border: 3px ridge var(--green);
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(0, 255, 102, 0.08) 0 2px,
+      transparent 2px 4px
+    ),
+    radial-gradient(circle at center, rgba(255, 32, 32, 0.12), transparent 60%),
+    #020802;
+  font-family: var(--mono);
+  text-align: center;
+  box-shadow:
+    inset 0 0 24px rgba(0, 255, 102, 0.18),
+    0 0 18px rgba(255, 32, 32, 0.16);
+}
+
+.main-countdown-inner {
+  padding: 26px 18px;
+  border: 1px inset var(--green);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06) 0 4px,
+      transparent 4px 8px
+    ),
+    rgba(0, 0, 0, 0.82);
+}
+
+.main-countdown-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--red);
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: uglyBlink 1200ms steps(2) infinite;
+}
+
+.main-countdown-date {
+  display: block;
+  margin: 6px 0 10px;
+  color: var(--acid);
+  font-family: var(--serif);
+  font-size: 54px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 0 #660000;
+}
+
+.main-countdown-value {
+  display: block;
+  color: var(--green);
+  font-size: 34px;
+  line-height: 1.35;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.75);
+}
+
+.main-countdown-note {
+  margin: 16px auto 0;
+  color: var(--gray);
+  font-family: var(--mono);
+  font-size: 16px;
+}
+
 .hero-console,
 .status-panel,
 .wide-section {
@@ -734,6 +803,7 @@ marquee {
 @media (max-width: 900px) {
   .topbar {
     align-items: flex-start;
+    flex-wrap: wrap;
   }
 
   .brand {
@@ -813,6 +883,32 @@ marquee {
     display: block;
     margin: 5px 0;
     font-size: 20px;
+  }
+
+  .main-countdown-panel {
+    margin: 14px 0;
+    padding: 18px;
+  }
+
+  .main-countdown-inner {
+    padding: 18px 12px;
+  }
+
+  .main-countdown-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .main-countdown-date {
+    font-size: 38px;
+  }
+
+  .main-countdown-value {
+    font-size: 20px;
+  }
+
+  .main-countdown-note {
+    font-size: 13px;
   }
 
   .hero-console,
