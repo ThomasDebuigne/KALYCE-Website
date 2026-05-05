@@ -596,7 +596,7 @@
                 <li><strong>Morphologie :</strong> ${escapeHtml(entity.morphology)}</li>
                 <li><strong>Zone :</strong> ${escapeHtml(entity.zone)}</li>
                 <li><strong>Comportement :</strong> ${escapeHtml(entity.behavior)}</li>
-                ${entity.failure ? `<li><strong>Echec :</strong> ${escapeHtml(entity.failure)}</li>` : ""}
+                ${entity.failure ? `<li><strong>Échec :</strong> ${escapeHtml(entity.failure)}</li>` : ""}
                 ${entity.lastSeen ? `<li><strong>Dernière preuve :</strong> ${escapeHtml(entity.lastSeen)}</li>` : ""}
                 <li><strong>Contre-mesure :</strong> ${escapeHtml(entity.countermeasure)}</li>
                 <li><strong>Instruction :</strong> ${escapeHtml(entity.instruction || entity.note)}</li>

@@ -13,105 +13,105 @@
     ],
 
     status: [
-      "Systeme : ancien",
-      "Interface publique : volontairement limitee",
-      "Acces profond : verrouille",
-      "Archives : incompletes",
+      "Système : ancien",
+      "Interface publique : volontairement limitée",
+      "Accès profond : verrouillé",
+      "Archives : incomplètes",
       "Observation : active",
-      "Derniere synchronisation : inconnue"
+      "Dernière synchronisation : inconnue"
     ],
 
     kalyce: [
-      "KALYCE n'est pas nee d'une promesse.",
+      "KALYCE n'est pas née d'une promesse.",
       "Elle est apparue dans les marges d'un dossier judiciaire.",
-      "Recherche privee. Financement discret. Resultats presentes avant verification.",
-      "Les rapports publics parlent de progres.",
+      "Recherche privée. Financement discret. Résultats présentés avant vérification.",
+      "Les rapports publics parlent de progrès.",
       "Les rapports internes parlent moins."
     ],
 
     application: [
       "Formulaire actif : apply.html",
-      "Transmission reseau : aucune",
-      "Les candidatures sont enregistrees localement.",
-      "Poste propose : surveillance nocturne, 00:00-06:00.",
-      "Experience requise : rester calme lorsque les consignes changent seules."
+      "Transmission réseau : active",
+      "Les candidatures sont enregistrées.",
+      "Poste proposé : surveillance nocturne, 00:00-06:00.",
+      "Expérience requise : rester calme lorsque les consignes changent seules."
     ],
 
     failed: [
-      "Dossiers incomplets detectes.",
-      "Nombre exact : non affiche",
+      "Dossiers incomplets détectés.",
+      "Nombre exact : non affiché",
       "Index local : /entities.html",
-      "Statut : archive non referencee",
-      "Certaines erreurs ont continue apres leur cloture."
+      "Statut : archive non référencée",
+      "Certaines erreurs ont continué après leur clôture."
     ],
 
     sealed: [
-      "DOSSIER SCELLE",
-      "Nom : [SUPPRIME]",
-      "Origine : incoherente",
+      "DOSSIER SCELLÉ",
+      "Nom : [SUPPRIMÉ]",
+      "Origine : incohérente",
       "Classement : erreur persistante",
-      "Acces refuse.",
-      "Instruction : ne pas completer ce qui manque."
+      "Accès refusé.",
+      "Instruction : ne pas compléter ce qui manque."
     ],
 
     deviance: [
       "Protocole reconnu.",
       "DEVIANCE n'est pas un surnom.",
       "DEVIANCE n'est pas un projet public.",
-      "DEVIANCE commence quand l'observation cesse d'etre passive.",
-      "Etat : dormant / instable / attendu"
+      "DEVIANCE commence quand l'observation cesse d'être passive.",
+      "État : dormant / instable / attendu"
     ],
 
     entity: [
       "Terme invalide dans cette interface.",
-      "Les entrees individuelles ne sont pas disponibles.",
-      "Utilisez les archives autorisees.",
+      "Les entrées individuelles ne sont pas disponibles.",
+      "Utilisez les archives autorisées.",
       "Ou n'utilisez rien."
     ],
 
     andy: [
-      "Entree retrouvee : ANDY.",
+      "Entrée retrouvée : ANDY.",
       "Petite silhouette. Trop immobile hors champ.",
       "Elle suit ce qui fait du bruit.",
-      "Ne laissez pas le silence choisir a votre place."
+      "Ne laissez pas le silence choisir à votre place."
     ],
 
     alice: [
-      "Entree retrouvee : ALICE.",
+      "Entrée retrouvée : ALICE.",
       "Posture de mannequin. Distance instable.",
       "Elle bouge surtout quand personne ne confirme sa position.",
-      "Les controles trop espacés aggravent les erreurs."
+      "Les contrôles trop espacés aggravent les erreurs."
     ],
 
     faceless: [
-      "Entree retrouvee : FACELESS.",
+      "Entrée retrouvée : FACELESS.",
       "Taille humaine. Aucun visage exploitable.",
-      "L'image se degrade quand on insiste.",
-      "Certaines presences doivent seulement etre evitees."
+      "L'image se dégrade quand on insiste.",
+      "Certaines présences doivent seulement être évitées."
     ],
 
     chimera: [
-      "Entree retrouvee : CHIMERA.",
-      "Assemblage massif. Forme incoherente.",
-      "L'ecran principal semble l'attirer.",
-      "Trop de lumiere facilite son approche."
+      "Entrée retrouvée : CHIMERA.",
+      "Assemblage massif. Forme incohérente.",
+      "L'écran principal semble l'attirer.",
+      "Trop de lumière facilite son approche."
     ],
 
     daughter: [
-      "Entree protegee.",
-      "Patiente initiale : non nommee",
+      "Entrée protégée.",
+      "Patiente initiale : non nommée",
       "Statut public : victime",
       "Statut interne : contradiction",
-      "Aucune designation personnelle ne sera affichee."
+      "Aucune désignation personnelle ne sera affichée."
     ],
 
     67: [
       "67.",
       "six... seven...",
-      "Commande acceptee trop vite.",
-      "Analyse annulee : le systeme a reconnu la reference.",
-      "Aucune donnee utile. Seulement un echo internet.",
-      "Rapport interne : le technicien a souffle du nez.",
+      "Commande acceptée trop vite.",
+      "Analyse annulée : le système a reconnu la référence.",
+      "Aucune donnée utile. Seulement un écho internet.",
+      "Rapport interne : le technicien a soufflé du nez.",
       "Ne recommence pas.",
       "Ou recommence. Le terminal juge, mais il comprend."
     ]
@@ -145,8 +145,8 @@
     }
 
     append([
-      "Connexion locale : KSD-MIRROR-51",
-      "Session limitee.",
+      "Connexion locale : KSD-LOCAL-51",
+      "Session limitée.",
       "Tapez help.",
       "Les noms ne sont pas des commandes."
     ], "system");
@@ -168,8 +168,8 @@
       append(
         responses[command] || [
           "Commande inconnue.",
-          "Cette requete ne correspond a aucune archive publique.",
-          "Ou elle a ete retiree avant votre arrivee."
+          "Cette requête ne correspond à aucune archive publique.",
+          "Ou elle a été retirée avant votre arrivée."
         ],
         responses[command] ? "system" : "error"
       );

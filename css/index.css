@@ -109,7 +109,7 @@ p {
 }
 
 .site-shell::before {
-  display: block;
+  display: none;
   padding: 6px;
   border: 1px solid var(--line);
   color: var(--red);
@@ -117,7 +117,7 @@ p {
   font-family: var(--mono);
   font-size: 13px;
   text-align: center;
-  content: "!! KALYCE mirror node // Area51/Quadrant style // do not index !!";
+  content: none;
 }
 
 /* Header */

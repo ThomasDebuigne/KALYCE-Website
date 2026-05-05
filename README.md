@@ -1,13 +1,13 @@
 # DEVIANCE / KALYCE SECURITY DIVISION
 
 Site ARG horrifique statique en HTML, CSS et JavaScript vanilla.
-Direction actuelle : vieux web bizarre, faux miroir KALYCE cache, inspire des pages GeoCities Area51/Quadrant.
+Direction actuelle : site horrifique rétro autour des archives KALYCE.
 
-## Pages conservees
+## Pages conservées
 
-- `index.html` : presentation complotiste de KALYCE, origine du groupe, experiences declarees reussies.
+- `index.html` : présentation complotiste de KALYCE, origine du groupe, expériences déclarées réussies.
 - `apply.html` : formulaire de candidature.
-- `entities.html` : page cachee des quatre experiences ratees.
+- `entities.html` : page cachée des quatre expériences ratées.
 - `terminal.html` : terminal de maintenance.
 
 ## Lancement local
@@ -27,4 +27,4 @@ http://localhost:5173
 ## Configuration
 
 - Sons futurs : `assets/sounds` et `js/config.js`, objet `audioTracks`.
-- La page cachee reste accessible par `entities.html` et via la commande `failed` dans le terminal.
+- La page cachée reste accessible par `entities.html` et via la commande `failed` dans le terminal.

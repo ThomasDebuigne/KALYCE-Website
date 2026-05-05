@@ -108,7 +108,7 @@ p {
 }
 
 .site-shell::before {
-  display: block;
+  display: none;
   padding: 4px;
   border: 1px solid var(--line);
   color: var(--red);
@@ -116,7 +116,7 @@ p {
   font-family: var(--mono);
   font-size: 12px;
   text-align: center;
-  content: "!! KALYCE mirror node // Area51/Quadrant style // do not index !!";
+  content: none;
 }
 
 .topbar {
@@ -720,7 +720,7 @@ select:focus {
 .failed-shell::before {
   color: var(--acid);
   background: #180000;
-  content: "404 // cache residue // failed index recovered // this route is not linked";
+  content: none;
 }
 
 body[data-page="entities"] {
