@@ -489,6 +489,28 @@ select:focus {
   color: #000;
 }
 
+.form-status {
+  min-height: 24px;
+  margin: 14px 0 0;
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.form-status.error {
+  color: var(--red);
+}
+
+.application-accepted {
+  width: 100%;
+  margin: 0;
+}
+
+.application-accepted [data-temp-id] {
+  color: var(--acid);
+  font-family: var(--mono);
+}
+
 /* Effets */
 
 .glitch-text {

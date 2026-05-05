@@ -353,10 +353,116 @@
     });
   }
 
+  function getFormValue(form, name) {
+    const field = form.elements[name];
+    return field ? String(field.value || "").trim() : "";
+  }
+
+  function getCheckedQuestions(form) {
+    return $$(".question-list input[type='checkbox']", form)
+      .filter((input) => input.checked)
+      .map((input) => {
+        const label = input.closest("label");
+        return label ? label.textContent.replace(/\s+/g, " ").trim() : "Question validée";
+      });
+  }
+
+  function limitDiscordText(value, maxLength = 1024) {
+    const text = String(value || "").trim();
+
+    if (!text) return "Non renseigné";
+    if (text.length <= maxLength) return text;
+
+    return `${text.slice(0, maxLength - 3)}...`;
+  }
+
+  function buildApplicationWebhookPayload(form, generatedId) {
+    const firstName = getFormValue(form, "firstName");
+    const lastName = getFormValue(form, "lastName");
+    const checkedQuestions = getCheckedQuestions(form);
+
+    return {
+      username: "KALYCE Recrutement",
+      content: `Nouvelle candidature reçue : ${generatedId}`,
+      allowed_mentions: {
+        parse: []
+      },
+      embeds: [
+        {
+          title: "Nouvelle candidature KALYCE",
+          color: 0xff2020,
+          timestamp: new Date().toISOString(),
+          fields: [
+            {
+              name: "Identifiant",
+              value: generatedId,
+              inline: true
+            },
+            {
+              name: "Nom",
+              value: limitDiscordText(lastName, 256),
+              inline: true
+            },
+            {
+              name: "Prénom",
+              value: limitDiscordText(firstName, 256),
+              inline: true
+            },
+            {
+              name: "Âge",
+              value: limitDiscordText(getFormValue(form, "age"), 256),
+              inline: true
+            },
+            {
+              name: "Email",
+              value: limitDiscordText(getFormValue(form, "email"), 256),
+              inline: true
+            },
+            {
+              name: "Disponibilité nocturne",
+              value: limitDiscordText(getFormValue(form, "availability"), 256),
+              inline: true
+            },
+            {
+              name: "Tests validés",
+              value: limitDiscordText(checkedQuestions.map((question) => `- ${question}`).join("\n")),
+              inline: false
+            },
+            {
+              name: "Origine",
+              value: limitDiscordText(window.location.href),
+              inline: false
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  async function sendApplicationWebhook(form, generatedId) {
+    const webhookUrl = config.webhooks && config.webhooks.application;
+
+    if (!webhookUrl) return;
+
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(buildApplicationWebhookPayload(form, generatedId))
+    });
+
+    if (!response.ok) {
+      throw new Error(`Webhook Discord indisponible (${response.status})`);
+    }
+  }
+
   function initApplicationForm() {
     const form = $("[data-application-form]");
     const accepted = $("[data-accepted-screen]");
     const tempNode = $("[data-temp-id]");
+    const statusNode = $("[data-application-status]");
+    const submitButton = form ? $("button[type='submit']", form) : null;
 
     if (!form || !accepted) return;
 
@@ -371,7 +477,7 @@
       return;
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!form.checkValidity()) {
@@ -380,6 +486,34 @@
       }
 
       const generatedId = `KSD-${Math.floor(100 + Math.random() * 900)}-${Math.floor(10 + Math.random() * 90)}`;
+      const initialButtonText = submitButton ? submitButton.textContent : "";
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "TRANSMISSION EN COURS";
+      }
+
+      if (statusNode) {
+        statusNode.textContent = "Transmission du dossier vers le canal de recrutement...";
+        statusNode.classList.remove("error");
+      }
+
+      try {
+        await sendApplicationWebhook(form, generatedId);
+      } catch (_error) {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = initialButtonText;
+        }
+
+        if (statusNode) {
+          statusNode.textContent = "Transmission impossible. Vérifiez le canal webhook puis réessayez.";
+          statusNode.classList.add("error");
+        }
+
+        showSystemDialog("TRANSMISSION REFUSÉE", "Le canal webhook n'a pas répondu. Le dossier n'a pas été ajouté.");
+        return;
+      }
 
       localStorage.setItem(keys.applicationSubmitted, "true");
       localStorage.setItem(keys.access, "candidate");
@@ -390,7 +524,7 @@
 
       if (tempNode) tempNode.textContent = generatedId;
 
-      showSystemDialog("CANDIDATURE ACCEPTÉE", "Niveau d'accès : ATTENTE. Votre dossier a ete ajoute.");
+      showSystemDialog("CANDIDATURE ACCEPTÉE", "Niveau d'accès : ATTENTE. Votre dossier a été ajouté.");
     });
   }
 

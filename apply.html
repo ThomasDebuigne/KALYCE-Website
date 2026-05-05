@@ -76,7 +76,7 @@
           </aside>
 
           <section class="form-zone">
-            <form class="application-form" action="#" method="post">
+            <form class="application-form" action="#" method="post" data-application-form>
               <div class="form-header">
                 <span>FORM-KSD-06</span>
                 <span>statut : ouvert</span>
@@ -165,7 +165,27 @@
                   ENVOYER UNE CANDIDATURE
                 </button>
               </div>
+
+              <p class="form-status" role="status" aria-live="polite" data-application-status></p>
             </form>
+
+            <div class="application-accepted" data-accepted-screen hidden>
+              <div class="form-header">
+                <span>FORM-KSD-06</span>
+                <span>statut : transmis</span>
+              </div>
+
+              <h2>Dossier transmis</h2>
+
+              <p>
+                Identifiant temporaire :
+                <strong data-temp-id>KSD-000-00</strong>
+              </p>
+
+              <p>
+                Le canal recrutement a reçu votre candidature. Restez disponible.
+              </p>
+            </div>
           </section>
         </section>
       </main>
