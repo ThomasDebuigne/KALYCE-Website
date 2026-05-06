@@ -1,26 +1,21 @@
 {
-  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/Apply",
+      "source": "/xrz9qwv2",
       "destination": "/apply.html"
     },
     {
-      "source": "/Terminal",
+      "source": "/m0rn7vqx",
       "destination": "/terminal.html"
     },
     {
-      "source": "/Entities",
+      "source": "/qzv8n4l2",
       "destination": "/entities.html"
     },
     {
-      "source": "/screamer",
-      "destination": "/screamer/hidden.html"
-    },
-    {
-      "source": "/Screamer",
-      "destination": "/screamer/hidden.html"
+      "source": "/xyzxyzyxzyyxzyz",
+      "destination": "/xyzxyzyxzyyxzyz/index.html"
     }
   ]
 }

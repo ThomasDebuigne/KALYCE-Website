@@ -53,6 +53,25 @@
     transition: opacity 650ms ease;
   }
 
+  #video-start {
+    position: fixed;
+    left: 50%;
+    bottom: 12vh;
+    z-index: 151;
+    display: none;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  #video-gate.needs-tap #video-start {
+    display: block;
+  }
+
   #stage {
     position: fixed;
     inset: 0;
@@ -247,7 +266,11 @@
 
 <!-- Video d'entree -->
 <div id="video-gate">
-  <video id="entry-video" src="../assets/videos/video_kalyce.mp4" autoplay playsinline preload="auto"></video>
+  <video id="entry-video" autoplay playsinline webkit-playsinline preload="auto">
+    <source src="../assets/videos/video_kalyce_mobile.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <source src="../assets/videos/video_kalyce.mp4" type="video/mp4">
+  </video>
+  <div id="video-start">toucher pour lancer le son</div>
 </div>
 
 <!-- Ecran d'entree -->
@@ -268,7 +291,7 @@
   
   <!-- EXPERIENCE 01 -->
   <div style="margin-bottom: 100px; position:relative;">
-    <img src="../assets/images/screamer/i2.png" style="width:250px; filter:grayscale(1) contrast(5) invert(1); transform: rotate(-10deg); position:absolute; right:10px; top:0; opacity:0.6; border: 4px solid #111;">
+    <img src="../assets/images/kvn4qz91/i2.png" style="width:250px; filter:grayscale(1) contrast(5) invert(1); transform: rotate(-10deg); position:absolute; right:10px; top:0; opacity:0.6; border: 4px solid #111;">
     <h2 style="color:#a00; border-bottom: 1px solid #400;">DOSSIER #012 : PROJET "PUPILLE"</h2>
     <p style="max-width: 600px; line-height: 1.6;">
       <strong>SUJET :</strong> Homme, 24 ans. <br>
@@ -291,7 +314,7 @@
     <p style="margin-top:20px; font-style:italic;">
       "Le son n'etait pas dans mes oreilles. Il etait dans mes os. Mes dents ont commence a vibrer jusqu'a ce qu'elles eclatent."
     </p>
-    <img src="../assets/images/screamer/i4.png" style="width:300px; filter:sepia(1) contrast(2) brightness(0.5); transform: scaleX(-1) rotate(5deg); margin-top:20px; border:1px solid #300;">
+    <img src="../assets/images/kvn4qz91/i4.png" style="width:300px; filter:sepia(1) contrast(2) brightness(0.5); transform: scaleX(-1) rotate(5deg); margin-top:20px; border:1px solid #300;">
   </div>
 
   <!-- ASCII ART CREEPY -->
@@ -323,7 +346,7 @@
       Pourtant, il continue de marcher. Il cherche de la peau neuve. <br>
       <span style="color:#f00; font-weight:bold;">PEUT-ETRE LA VOTRE ?</span>
     </p>
-    <img src="../assets/images/screamer/i7.png" style="width:400px; filter:hue-rotate(90deg) contrast(4); display:block; margin: 20px auto; opacity:0.8;">
+    <img src="../assets/images/kvn4qz91/i7.png" style="width:400px; filter:hue-rotate(90deg) contrast(4); display:block; margin: 20px auto; opacity:0.8;">
   </div>
 
   <div class="archive-divider">
@@ -332,7 +355,7 @@
 
   <div class="archive-case">
     <div class="archive-visual">
-      <img src="../assets/images/screamer/web_corridor_ellis.jpg" class="archive-photo tall" alt="">
+      <img src="../assets/images/kvn4qz91/web_corridor_ellis.jpg" class="archive-photo tall" alt="">
       <span class="archive-stamp">CAMERA 04 // COULOIR SANS FIN</span>
     </div>
     <div class="case-body">
@@ -349,7 +372,7 @@
 
   <div class="archive-case reverse">
     <div class="archive-visual">
-      <img src="../assets/images/screamer/web_operating_room.jpg" class="archive-photo wide" alt="">
+      <img src="../assets/images/kvn4qz91/web_operating_room.jpg" class="archive-photo wide" alt="">
       <span class="archive-stamp">TABLE 7 // INCIDENT</span>
     </div>
     <div class="case-body">
@@ -366,7 +389,7 @@
 
   <div class="archive-case">
     <div class="archive-visual">
-      <img src="../assets/images/screamer/web_medical_museum.jpg" class="archive-photo wide" alt="">
+      <img src="../assets/images/kvn4qz91/web_medical_museum.jpg" class="archive-photo wide" alt="">
       <span class="archive-stamp">BATIMENT FERME // 03:17</span>
     </div>
     <div class="case-body">
@@ -383,7 +406,7 @@
 
   <div class="archive-case reverse">
     <div class="archive-visual">
-      <img src="../assets/images/screamer/web_wash_asylum.jpg" class="archive-photo wide" alt="">
+      <img src="../assets/images/kvn4qz91/web_wash_asylum.jpg" class="archive-photo wide" alt="">
       <span class="archive-stamp">PAVILLON NORD // NEGATIF</span>
     </div>
     <div class="case-body">
@@ -400,7 +423,7 @@
 
   <div class="archive-case">
     <div class="archive-visual">
-      <img src="../assets/images/screamer/web_trans_allegheny.jpg" class="archive-photo wide" alt="">
+      <img src="../assets/images/kvn4qz91/web_trans_allegheny.jpg" class="archive-photo wide" alt="">
       <span class="archive-stamp">BATIMENT 12 // SOUS-SOL</span>
     </div>
     <div class="case-body">
@@ -416,18 +439,18 @@
   </div>
 
   <div class="contact-sheet">
-    <img src="../assets/images/screamer/scare1.jpg" alt="">
-    <img src="../assets/images/screamer/scare2.jpg" alt="">
-    <img src="../assets/images/screamer/scare3.jpg" alt="">
-    <img src="../assets/images/screamer/scare4.jpg" alt="">
-    <img src="../assets/images/screamer/scare5.jpg" alt="">
-    <img src="../assets/images/screamer/scare6.jpg" alt="">
-    <img src="../assets/images/screamer/scare7.jpg" alt="">
-    <img src="../assets/images/screamer/web_corridor_ellis.jpg" alt="">
-    <img src="../assets/images/screamer/web_operating_room.jpg" alt="">
-    <img src="../assets/images/screamer/web_wash_asylum.jpg" alt="">
-    <img src="../assets/images/screamer/web_trans_allegheny.jpg" alt="">
-    <img src="../assets/images/screamer/web_medical_museum.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare1.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare2.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare3.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare4.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare5.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare6.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/scare7.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/web_corridor_ellis.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/web_operating_room.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/web_wash_asylum.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/web_trans_allegheny.jpg" alt="">
+    <img src="../assets/images/kvn4qz91/web_medical_museum.jpg" alt="">
   </div>
 
   <!-- FOOTER DES ENFERS -->
@@ -457,13 +480,13 @@ const CONFIG = {
 
 // --- IMAGES -------------------------------------------------------------------
 const IMAGES = [
-  '../assets/images/screamer/i1.png','../assets/images/screamer/i2.png','../assets/images/screamer/i3.png','../assets/images/screamer/i4.png',
-  '../assets/images/screamer/i5.png','../assets/images/screamer/i6.png','../assets/images/screamer/i7.png','../assets/images/screamer/i8.png',
-  '../assets/images/screamer/scare1.jpg','../assets/images/screamer/scare2.jpg','../assets/images/screamer/scare3.jpg','../assets/images/screamer/scare4.jpg',
-  '../assets/images/screamer/scare5.jpg','../assets/images/screamer/scare6.jpg','../assets/images/screamer/scare7.jpg',
-  '../assets/images/screamer/web_corridor_ellis.jpg','../assets/images/screamer/web_operating_room.jpg',
-  '../assets/images/screamer/web_wash_asylum.jpg','../assets/images/screamer/web_trans_allegheny.jpg',
-  '../assets/images/screamer/web_medical_museum.jpg'
+  '../assets/images/kvn4qz91/i1.png','../assets/images/kvn4qz91/i2.png','../assets/images/kvn4qz91/i3.png','../assets/images/kvn4qz91/i4.png',
+  '../assets/images/kvn4qz91/i5.png','../assets/images/kvn4qz91/i6.png','../assets/images/kvn4qz91/i7.png','../assets/images/kvn4qz91/i8.png',
+  '../assets/images/kvn4qz91/scare1.jpg','../assets/images/kvn4qz91/scare2.jpg','../assets/images/kvn4qz91/scare3.jpg','../assets/images/kvn4qz91/scare4.jpg',
+  '../assets/images/kvn4qz91/scare5.jpg','../assets/images/kvn4qz91/scare6.jpg','../assets/images/kvn4qz91/scare7.jpg',
+  '../assets/images/kvn4qz91/web_corridor_ellis.jpg','../assets/images/kvn4qz91/web_operating_room.jpg',
+  '../assets/images/kvn4qz91/web_wash_asylum.jpg','../assets/images/kvn4qz91/web_trans_allegheny.jpg',
+  '../assets/images/kvn4qz91/web_medical_museum.jpg'
 ];
 CONFIG.totalFrames = IMAGES.length;
 
@@ -847,11 +870,11 @@ function startGhostTerminal() {
 }
 
 // --- AUDIO --------------------------------------------------------------------
-const screamerSound = new Audio('../assets/sounds/screamer/le_saut_de_peur.wav');
+const screamerSound = new Audio('../assets/sounds/kvn4qz91/le_saut_de_peur.wav');
 screamerSound.preload = 'auto';
 screamerSound.loop = false;
 
-const ambientSound = new Audio('../assets/sounds/screamer/fond.wav');
+const ambientSound = new Audio('../assets/sounds/kvn4qz91/fond.wav');
 ambientSound.preload = 'auto';
 ambientSound.loop = true;
 ambientSound.volume = 0.12;
@@ -876,12 +899,10 @@ screamerSound.addEventListener('ended', () => {
 const videoGate = document.getElementById('video-gate');
 const entryVideo = document.getElementById('entry-video');
 const intro = document.getElementById('intro');
+const continueStorageKey = 'ksd_screamer_continue_clicked';
 let sequenceStarted = false;
 let videoCanBeSkipped = false;
-
-if (window.location.pathname.toLowerCase().endsWith('/screamer/hidden.html')) {
-  history.replaceState(null, '', '/screamer');
-}
+let videoNeedsUserStart = false;
 
 function showContinuePrompt() {
   if (intro.style.display === 'flex') return;
@@ -894,32 +915,15 @@ function showContinuePrompt() {
   intro.style.display = 'flex';
 }
 
-if (videoGate && entryVideo) {
-  entryVideo.addEventListener('ended', showContinuePrompt, { once: true });
-  entryVideo.addEventListener('error', () => setTimeout(showContinuePrompt, 800), { once: true });
-
-  setTimeout(() => {
-    videoCanBeSkipped = true;
-  }, 1400);
-
-  videoGate.addEventListener('click', () => {
-    if (!videoCanBeSkipped) return;
-    entryVideo.pause();
-    showContinuePrompt();
-  });
-
-  const playAttempt = entryVideo.play();
-
-  if (playAttempt && typeof playAttempt.catch === 'function') {
-    playAttempt.catch(() => setTimeout(showContinuePrompt, 800));
-  }
-} else {
-  showContinuePrompt();
-}
-
-intro.addEventListener('click', () => {
+function startScreamerSequence() {
   if (sequenceStarted) return;
   sequenceStarted = true;
+
+  try {
+    localStorage.setItem(continueStorageKey, 'true');
+  } catch (_error) {
+    // Storage can be blocked in private browsing; the sequence should still run.
+  }
 
   screamerSound.currentTime = 0;
   screamerIsFinished = false;
@@ -929,10 +933,74 @@ intro.addEventListener('click', () => {
     maybeStartAmbientSound();
   });
 
-  // Lancement et disparition instantanes
   intro.style.display = 'none';
   runSequence();
-});
+}
+
+function hasAlreadyClickedContinue() {
+  try {
+    return localStorage.getItem(continueStorageKey) === 'true';
+  } catch (_error) {
+    return false;
+  }
+}
+
+function prepareEntryVideoSound() {
+  entryVideo.muted = false;
+  entryVideo.defaultMuted = false;
+  entryVideo.volume = 1;
+  entryVideo.removeAttribute('muted');
+}
+
+function playEntryVideoWithSound() {
+  prepareEntryVideoSound();
+  return entryVideo.play();
+}
+
+if (hasAlreadyClickedContinue()) {
+  if (entryVideo) entryVideo.pause();
+  if (videoGate) videoGate.remove();
+  intro.style.display = 'none';
+  startScreamerSequence();
+} else if (videoGate && entryVideo) {
+  prepareEntryVideoSound();
+  entryVideo.playsInline = true;
+  entryVideo.setAttribute('playsinline', '');
+  entryVideo.setAttribute('webkit-playsinline', '');
+
+  entryVideo.addEventListener('ended', showContinuePrompt, { once: true });
+  entryVideo.addEventListener('error', () => setTimeout(showContinuePrompt, 800), { once: true });
+
+  setTimeout(() => {
+    videoCanBeSkipped = true;
+  }, 1400);
+
+  videoGate.addEventListener('click', () => {
+    if (videoNeedsUserStart) {
+      videoNeedsUserStart = false;
+      videoGate.classList.remove('needs-tap');
+      playEntryVideoWithSound().catch(() => showContinuePrompt());
+      return;
+    }
+
+    if (!videoCanBeSkipped) return;
+    entryVideo.pause();
+    showContinuePrompt();
+  });
+
+  const playAttempt = playEntryVideoWithSound();
+
+  if (playAttempt && typeof playAttempt.catch === 'function') {
+    playAttempt.catch(() => {
+      videoNeedsUserStart = true;
+      videoGate.classList.add('needs-tap');
+    });
+  }
+} else {
+  showContinuePrompt();
+}
+
+intro.addEventListener('click', startScreamerSequence);
 </script>
 </body>
 </html>

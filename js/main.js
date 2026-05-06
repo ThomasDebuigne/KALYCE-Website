@@ -318,7 +318,7 @@
           <p>${escapeHtml(message.text)}</p>
 
           <div class="recruitment-popup-actions">
-            <a href="/Apply">Candidature</a>
+            <a href="/xrz9qwv2">Candidature</a>
             <button type="button" data-popup-dismiss>Ignorer</button>
           </div>
         </div>
@@ -458,7 +458,7 @@
   }
 
   function openScreamerFlow() {
-    window.location.assign(config.links.screamer || "/screamer");
+    window.location.assign(config.links.screamer || "/xyzxyzyxzyyxzyz");
   }
 
   function initApplicationForm() {
