@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>...</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    cursor: none;
+  }
+
+  #video-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: #000;
+    cursor: none;
+  }
+
+  #entry-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.35) brightness(0.72) grayscale(0.45);
+  }
+
+  #video-gate::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.04) 0,
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px,
+        transparent 5px
+      ),
+      radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.72) 100%);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  #video-gate.is-ending {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 650ms ease;
+  }
+
+  #stage {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+  }
+
+  /* Chaque "photo" simulee = plein ecran */
+  .frame {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) contrast(1.6) grayscale(0.9);
+  }
+
+  /* Vignette pour chaque frame */
+  .frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.85) 100%);
+  }
+
+  /* Flash blanc entre les images */
+  #flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  /* Ecran noir initial avec texte */
+  #intro {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  #intro-text {
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+    user-select: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* Overlay bruit statique a la fin */
+  #static {
+    position: fixed;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 30;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+  }
+
+  .archive-divider {
+    margin: 120px 0 70px;
+    border-top: 1px solid #300;
+    border-bottom: 1px solid #200;
+    padding: 18px 0;
+    color: #700;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+
+  .archive-case {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.9fr) minmax(280px, 1.1fr);
+    gap: 30px;
+    align-items: center;
+    margin: 105px 0;
+    position: relative;
+  }
+
+  .archive-case.reverse .archive-visual {
+    order: 2;
+  }
+
+  .archive-visual {
+    position: relative;
+  }
+
+  .archive-photo {
+    width: 100%;
+    display: block;
+    border: 1px solid #300;
+    background: #000;
+    object-fit: cover;
+    max-height: 420px;
+    filter: grayscale(1) contrast(1.9) brightness(0.52) sepia(0.35);
+    box-shadow: 0 0 0 4px #060000, 0 0 45px rgba(120, 0, 0, 0.28);
+  }
+
+  .archive-photo.tall {
+    aspect-ratio: 4 / 5;
+  }
+
+  .archive-photo.wide {
+    aspect-ratio: 16 / 10;
+  }
+
+  .archive-stamp {
+    position: absolute;
+    right: -10px;
+    bottom: 12px;
+    padding: 5px 9px;
+    color: #f00;
+    border: 1px solid #500;
+    background: rgba(0, 0, 0, 0.85);
+    font-size: 11px;
+    transform: rotate(-4deg);
+  }
+
+  .case-body {
+    border-left: 1px solid #300;
+    padding-left: 22px;
+  }
+
+  .case-body h3 {
+    color: #a00;
+    margin-bottom: 14px;
+    font-size: 1.2rem;
+  }
+
+  .case-body p {
+    line-height: 1.65;
+    max-width: 720px;
+  }
+
+  .redacted {
+    background: #140000;
+    color: #b00;
+    padding: 2px 5px;
+  }
+
+  .contact-sheet {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 10px;
+    margin: 90px 0;
+    padding: 12px;
+    border: 1px solid #240000;
+    background: #030303;
+  }
+
+  .contact-sheet img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #160000;
+    filter: grayscale(1) contrast(2.2) brightness(0.46);
+  }
+
+  @media (max-width: 760px) {
+    #archive {
+      padding: 28px;
+    }
+
+    .archive-case,
+    .archive-case.reverse {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .archive-case.reverse .archive-visual {
+      order: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Video d'entree -->
+<div id="video-gate">
+  <video id="entry-video" src="../assets/videos/video_kalyce.mp4" autoplay playsinline preload="auto"></video>
+</div>
+
+<!-- Ecran d'entree -->
+<div id="intro">
+  <div id="intro-text">cliquer pour continuer</div>
+</div>
+
+<div id="flash"></div>
+<div id="static"></div>
+<div id="stage"></div>
+
+<!-- SECTION ARCHIVE CACHEE INITIALEMENT -->
+<div id="archive" style="display:none; background:#050505; color:#777; font-family:'Courier New', monospace; padding:50px; min-height:100vh; overflow-x:hidden; cursor:none; position:relative; z-index:9999;">
+  
+  <!-- CURSEUR PERSONNALISE -->
+  <div id="custom-cursor" style="position:fixed; width:20px; height:20px; border:2px solid #f00; border-radius:50%; pointer-events:none; z-index:10000; mix-blend-mode:difference; display:none;"></div>
+  <div id="cursor-dot" style="position:fixed; width:4px; height:4px; background:#f00; border-radius:50%; pointer-events:none; z-index:10000; display:none;"></div>
+  
+  <!-- EXPERIENCE 01 -->
+  <div style="margin-bottom: 100px; position:relative;">
+    <img src="../assets/images/screamer/i2.png" style="width:250px; filter:grayscale(1) contrast(5) invert(1); transform: rotate(-10deg); position:absolute; right:10px; top:0; opacity:0.6; border: 4px solid #111;">
+    <h2 style="color:#a00; border-bottom: 1px solid #400;">DOSSIER #012 : PROJET "PUPILLE"</h2>
+    <p style="max-width: 600px; line-height: 1.6;">
+      <strong>SUJET :</strong> Homme, 24 ans. <br>
+      <strong>PROCEDURE :</strong> Ablation des paupieres et injection de nitrate d'argent dans le nerf optique. <br>
+      <strong>RESULTAT :</strong> Le sujet pretend voir des "etres de geometrie" ramper sur les murs de la cellule. 
+      A 04h00, il a tente de s'arracher les yeux en hurlant que "le noir est trop brillant". 
+      <br><br>
+      <span style="background:#200; color:#f00; padding:2px;">[NOTE DU DR. MALUM : "Il ne mentait pas. J'ai vu les ombres bouger moi aussi."]</span>
+    </p>
+  </div>
+
+  <!-- SYMBOLES SATANIQUES DANS LA MARGE -->
+  <div style="position: absolute; left: 10px; top: 400px; font-size: 2em; color: #151515;">
+    ?<br>?<br>?<br>?<br>?<br>?<br>?<br>?<br>?
+  </div>
+
+  <!-- EXPERIENCE 02 -->
+  <div style="margin-top: 150px; text-align: right;">
+    <h2 style="color:#a00; border-bottom: 1px solid #400; display:inline-block;">DOSSIER #088 : LA FREQUENCE DU VIDE</h2>
+    <p style="margin-top:20px; font-style:italic;">
+      "Le son n'etait pas dans mes oreilles. Il etait dans mes os. Mes dents ont commence a vibrer jusqu'a ce qu'elles eclatent."
+    </p>
+    <img src="../assets/images/screamer/i4.png" style="width:300px; filter:sepia(1) contrast(2) brightness(0.5); transform: scaleX(-1) rotate(5deg); margin-top:20px; border:1px solid #300;">
+  </div>
+
+  <!-- ASCII ART CREEPY -->
+  <pre style="color:#200; font-size: 10px; line-height: 8px; margin: 100px 0;">
+             .edee...      .
+          .eEEBBEEBBEEee.  .
+        .eEBEEBBEEBBEEBBEEe.
+       eEBBEEBBEEBBEEBBEEBBEe
+      eEBBEEBBEEBBEEBBEEBBEEBBe
+     eEBBEEBBEEBBEEBBEEBBEEBBEEb
+    dBEEBBEEBBEEBBEEBBEEBBEEBBEEb
+    BEEBBEEBBEEBBEEBBEEBBEEBBEEBB
+    BEEBBEEBBEEBBEEBBEEBBEEBBEEBB
+    BEEBBEEBBEEBBEEBBEEBBEEBBEEBB
+    BEEBBEEBBEEBBEEBBEEBBEEBBEEBB
+    "BEEBBEEBBEEBBEEBBEEBBEEBBEEB"
+     "BEEBBEEBBEEBBEEBBEEBBEEBBE"
+      "BEEBBEEBBEEBBEEBBEEBBEB"
+        "BEEBBEEBBEEBBEEBBEB"
+          "BEEBBEEBBEEBBEB"
+             ""EEBBE""
+  </pre>
+
+  <!-- EXPERIENCE 03 -->
+  <div style="margin-top: 50px; background: #080808; padding: 20px; border: 1px dashed #400;">
+    <h3 style="color:#600;">ALERTE BIOLOGIQUE : SPECIMEN #i7</h3>
+    <p>
+      Le corps du sujet a rejete sa propre peau a 100%. <br>
+      Pourtant, il continue de marcher. Il cherche de la peau neuve. <br>
+      <span style="color:#f00; font-weight:bold;">PEUT-ETRE LA VOTRE ?</span>
+    </p>
+    <img src="../assets/images/screamer/i7.png" style="width:400px; filter:hue-rotate(90deg) contrast(4); display:block; margin: 20px auto; opacity:0.8;">
+  </div>
+
+  <div class="archive-divider">
+    <p>> LOT RECUPERE APRES INCENDIE // PLAQUES HUMIDES // INDEX HUMAIN INCOMPLET</p>
+  </div>
+
+  <div class="archive-case">
+    <div class="archive-visual">
+      <img src="../assets/images/screamer/web_corridor_ellis.jpg" class="archive-photo tall" alt="">
+      <span class="archive-stamp">CAMERA 04 // COULOIR SANS FIN</span>
+    </div>
+    <div class="case-body">
+      <h3>DOSSIER #143 : CHAMBRE D'OBSERVATION</h3>
+      <p>
+        <strong>SUJET :</strong> femme, 31 ans. <br>
+        <strong>PROCEDURE :</strong> privee de miroirs pendant 11 jours, exposee uniquement a des reflets dans de l'eau noire. <br>
+        <strong>RESULTAT :</strong> les moniteurs ont compte deux respirations dans une piece ou un seul corps etait present.
+        Au matin, le sujet parlait avec une voix plus lente que ses mouvements.
+      </p>
+      <p><span class="redacted">NOTE :</span> ne jamais ouvrir la porte si la respiration continue apres extinction des lampes.</p>
+    </div>
+  </div>
+
+  <div class="archive-case reverse">
+    <div class="archive-visual">
+      <img src="../assets/images/screamer/web_operating_room.jpg" class="archive-photo wide" alt="">
+      <span class="archive-stamp">TABLE 7 // INCIDENT</span>
+    </div>
+    <div class="case-body">
+      <h3>DOSSIER #219 : LE BAIN D'ECHO</h3>
+      <p>
+        <strong>SUJET :</strong> homme, 42 ans. <br>
+        <strong>PROCEDURE :</strong> anesthesie partielle, micro-impulsions sonores dans la machoire, lumiere blanche fixe. <br>
+        <strong>RESULTAT :</strong> le sujet a cesse de repondre, puis les instruments ont repete ses derniers mots sans source
+        electrique branchee.
+      </p>
+      <p><span class="redacted">TRANSCRIPTION :</span> "ils m'ont remis dans le mauvais corps."</p>
+    </div>
+  </div>
+
+  <div class="archive-case">
+    <div class="archive-visual">
+      <img src="../assets/images/screamer/web_medical_museum.jpg" class="archive-photo wide" alt="">
+      <span class="archive-stamp">BATIMENT FERME // 03:17</span>
+    </div>
+    <div class="case-body">
+      <h3>DOSSIER #304 : PROTOCOLE "MAINS FROIDES"</h3>
+      <p>
+        <strong>SUJET :</strong> groupe de 6 volontaires. <br>
+        <strong>PROCEDURE :</strong> synchronisation du pouls par chambre froide, privation de sommeil, lecture de dossiers falsifies. <br>
+        <strong>RESULTAT :</strong> chaque volontaire a donne le meme nom pour l'observateur absent.
+        Aucun employe de ce nom n'a jamais existe.
+      </p>
+      <p><span class="redacted">ANOMALIE :</span> les empreintes retrouvees sur les vitres etaient a l'interieur du verre.</p>
+    </div>
+  </div>
+
+  <div class="archive-case reverse">
+    <div class="archive-visual">
+      <img src="../assets/images/screamer/web_wash_asylum.jpg" class="archive-photo wide" alt="">
+      <span class="archive-stamp">PAVILLON NORD // NEGATIF</span>
+    </div>
+    <div class="case-body">
+      <h3>DOSSIER #511 : PAVILLON INVERSE</h3>
+      <p>
+        <strong>SUJET :</strong> patient sans identite administrative. <br>
+        <strong>PROCEDURE :</strong> exposition a une lumiere rouge pulsee, isolement auditif, journal de reve obligatoire. <br>
+        <strong>RESULTAT :</strong> les pages du journal ont ete retrouvees remplies avant distribution du cahier.
+        Le patient connaissait les cicatrices des techniciens.
+      </p>
+      <p><span class="redacted">DIRECTIVE :</span> bruler les journaux avant de les lire.</p>
+    </div>
+  </div>
+
+  <div class="archive-case">
+    <div class="archive-visual">
+      <img src="../assets/images/screamer/web_trans_allegheny.jpg" class="archive-photo wide" alt="">
+      <span class="archive-stamp">BATIMENT 12 // SOUS-SOL</span>
+    </div>
+    <div class="case-body">
+      <h3>DOSSIER #690 : LE MARCHEUR DU SOUS-SOL</h3>
+      <p>
+        <strong>SUJET :</strong> inconnu, taille variable selon les temoins. <br>
+        <strong>PROCEDURE :</strong> tentative de confinement par lumiere constante et camera thermique. <br>
+        <strong>RESULTAT :</strong> la camera a enregistre une silhouette froide marchant contre le plafond.
+        Les gardes ont refuse d'entrer apres avoir entendu leurs propres pas derriere eux.
+      </p>
+      <p><span class="redacted">ETAT :</span> zone condamnee. Les cadenas sont remplaces chaque nuit.</p>
+    </div>
+  </div>
+
+  <div class="contact-sheet">
+    <img src="../assets/images/screamer/scare1.jpg" alt="">
+    <img src="../assets/images/screamer/scare2.jpg" alt="">
+    <img src="../assets/images/screamer/scare3.jpg" alt="">
+    <img src="../assets/images/screamer/scare4.jpg" alt="">
+    <img src="../assets/images/screamer/scare5.jpg" alt="">
+    <img src="../assets/images/screamer/scare6.jpg" alt="">
+    <img src="../assets/images/screamer/scare7.jpg" alt="">
+    <img src="../assets/images/screamer/web_corridor_ellis.jpg" alt="">
+    <img src="../assets/images/screamer/web_operating_room.jpg" alt="">
+    <img src="../assets/images/screamer/web_wash_asylum.jpg" alt="">
+    <img src="../assets/images/screamer/web_trans_allegheny.jpg" alt="">
+    <img src="../assets/images/screamer/web_medical_museum.jpg" alt="">
+  </div>
+
+  <!-- FOOTER DES ENFERS -->
+  <div style="margin-top: 100px; border-top: 2px solid #200; padding-top: 20px; font-size: 0.8em; color:#333;">
+    <p>TOTAL_CASES_RECOVERED: 666</p>
+    <p>FAILED_EXPERIMENTS: ALL OF THEM</p>
+    <div style="word-break: break-all; opacity: 0.2;">
+      ????????????????????????????????????????????????????????????????????????????????????????????????
+      ????????????????????????????????????????????????????????????????????????????????????????????????
+    </div>
+  </div>
+
+</div>
+
+<script>
+// --- CONFIG -------------------------------------------------------------------
+const CONFIG = {
+  totalFrames: 8,
+  duration: 3000,           // duree totale en ms
+  frameVisible: 60,         // ms pendant laquelle chaque frame reste visible
+  spawnInterval: 25,        // ms entre chaque apparition (overlap = spawnInterval < frameVisible)
+  flashDuration: 20,
+  positionJitter: 0.4,
+  scaleVariation: 0.3,
+  rotationMax: 10,
+};
+
+// --- IMAGES -------------------------------------------------------------------
+const IMAGES = [
+  '../assets/images/screamer/i1.png','../assets/images/screamer/i2.png','../assets/images/screamer/i3.png','../assets/images/screamer/i4.png',
+  '../assets/images/screamer/i5.png','../assets/images/screamer/i6.png','../assets/images/screamer/i7.png','../assets/images/screamer/i8.png',
+  '../assets/images/screamer/scare1.jpg','../assets/images/screamer/scare2.jpg','../assets/images/screamer/scare3.jpg','../assets/images/screamer/scare4.jpg',
+  '../assets/images/screamer/scare5.jpg','../assets/images/screamer/scare6.jpg','../assets/images/screamer/scare7.jpg',
+  '../assets/images/screamer/web_corridor_ellis.jpg','../assets/images/screamer/web_operating_room.jpg',
+  '../assets/images/screamer/web_wash_asylum.jpg','../assets/images/screamer/web_trans_allegheny.jpg',
+  '../assets/images/screamer/web_medical_museum.jpg'
+];
+CONFIG.totalFrames = IMAGES.length;
+
+// --- UTILITAIRES --------------------------------------------------------------
+const rand = (min, max) => Math.random() * (max - min) + min;
+const randInt = (min, max) => Math.floor(rand(min, max));
+
+// --- CREATION DES FRAMES ------------------------------------------------------
+function buildFrame(index) {
+  const el = document.createElement('div');
+  el.className = 'frame';
+  el.style.backgroundImage = `url('${IMAGES[index % IMAGES.length]}')`;
+  el.style.backgroundSize = '100% 100%';  // etire meme si pas 1920x1080
+  el.style.backgroundPosition = 'center';
+  el.style.backgroundRepeat = 'no-repeat';
+  return el;
+}
+
+// --- POSITIONNEMENT ALEATOIRE -------------------------------------------------
+function randomizePosition(el) {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  // Jitter autour du centre (en plein ecran, decalage relatif a la taille)
+  const jitterX = (Math.random() - 0.5) * 2 * CONFIG.positionJitter * vw;
+  const jitterY = (Math.random() - 0.5) * 2 * CONFIG.positionJitter * vh;
+
+  const scale = 1 + (Math.random() - 0.5) * 2 * CONFIG.scaleVariation;
+  const rotate = (Math.random() - 0.5) * 2 * CONFIG.rotationMax;
+
+  el.style.left = `${jitterX}px`;
+  el.style.top  = `${jitterY}px`;
+  el.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
+}
+
+// --- SEQUENCE PRINCIPALE ------------------------------------------------------
+const stage = document.getElementById('stage');
+const flash = document.getElementById('flash');
+const staticOverlay = document.getElementById('static');
+
+// Pre-creer les frames
+const frames = Array.from({ length: CONFIG.totalFrames }, (_, i) => {
+  const f = buildFrame(i);
+  stage.appendChild(f);
+  return f;
+});
+
+// Spawn une frame visible pendant frameVisible ms, sans bloquer
+function spawnFrame(index, zBase) {
+  const frame = frames[index % frames.length];
+  // Clone pour permettre plusieurs instances du meme frame en meme temps
+  const clone = frame.cloneNode(true);
+  clone.style.opacity = '0';
+  stage.appendChild(clone);
+  randomizePosition(clone);
+  clone.style.zIndex = zBase + randInt(0, 10);
+
+  // Flash leger
+  flash.style.transition = 'none';
+  flash.style.opacity = String(rand(0.2, 0.6));
+  setTimeout(() => {
+    flash.style.transition = `opacity ${CONFIG.flashDuration}ms`;
+    flash.style.opacity = '0';
+  }, CONFIG.flashDuration);
+
+  // Apparition instantanee
+  clone.style.transition = 'none';
+  clone.style.opacity = '1';
+
+  // Disparition apres frameVisible
+  setTimeout(() => {
+    clone.style.transition = `opacity ${CONFIG.frameVisible * 0.4}ms ease-in`;
+    clone.style.opacity = '0';
+    setTimeout(() => clone.remove(), CONFIG.frameVisible * 0.5);
+  }, CONFIG.frameVisible);
+}
+
+async function runSequence() {
+  let zCounter = 0;
+  const startTime = Date.now();
+  let loopCounter = 0;
+
+  while (Date.now() - startTime < CONFIG.duration) {
+    // Shuffle pour chaque boucle
+    const order = Array.from({ length: CONFIG.totalFrames }, (_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = randInt(0, i + 1);
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+
+    // Acceleration progressive
+    const loopSpeed = CONFIG.spawnInterval * Math.max(0.2, (1 - loopCounter * 0.15));
+
+    for (const idx of order) {
+      if (Date.now() - startTime >= CONFIG.duration) break;
+      spawnFrame(idx, zCounter++);
+      await new Promise(r => setTimeout(r, Math.max(loopSpeed, 12)));
+    }
+
+    // Petit burst chaotique a la fin de chaque boucle
+    if (Date.now() - startTime < CONFIG.duration) {
+      for (let b = 0; b < 4; b++) {
+        spawnFrame(randInt(0, CONFIG.totalFrames), zCounter++);
+        await new Promise(r => setTimeout(r, 12));
+      }
+    }
+
+    // Pause noire entre les boucles si on a encore du temps
+    if (Date.now() - startTime < CONFIG.duration - 180) {
+      await new Promise(r => setTimeout(r, 120)); // pause plus courte
+    }
+    
+    loopCounter++;
+  }
+
+  // Flash final brutal
+  await new Promise(r => setTimeout(r, 80));
+  flash.style.transition = 'none';
+  flash.style.opacity = '1';
+  
+  // Bascule vers l'archive apres le flash
+  setTimeout(() => {
+    // On cache tout le reste
+    stage.style.display = 'none';
+    staticOverlay.style.display = 'none';
+    flash.style.display = 'none';
+    document.body.style.cursor = 'auto';
+    document.body.style.overflow = 'auto';
+    
+    // On affiche l'archive
+    document.getElementById('archive').style.display = 'block';
+    archiveIsVisible = true;
+    maybeStartAmbientSound();
+    startArchiveCorruption();
+  }, 180);
+}
+
+function startArchiveCorruption() {
+  const archive = document.getElementById('archive');
+  const cursor = document.getElementById('custom-cursor');
+  const dot = document.getElementById('cursor-dot');
+  
+  // Activer le curseur personnalise
+  cursor.style.display = 'block';
+  dot.style.display = 'block';
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX - 10 + 'px';
+    cursor.style.top = e.clientY - 10 + 'px';
+    dot.style.left = e.clientX - 2 + 'px';
+    dot.style.top = e.clientY - 2 + 'px';
+
+    // Parallaxe des images
+    const imgs = document.querySelectorAll('#archive img');
+    imgs.forEach(img => {
+      const speed = 20;
+      const x = (window.innerWidth - e.clientX * speed) / 100;
+      const y = (window.innerHeight - e.clientY * speed) / 100;
+      img.style.transform = `translate(${x}px, ${y}px) rotate(${img.style.transform.includes('rotate') ? img.style.transform.split('rotate(')[1].split(')')[0] : '0deg'})`;
+    });
+  });
+
+  // Jump-scare final au scroll
+  let triggered = false;
+  window.addEventListener('scroll', () => {
+    const scrollPercent = (window.innerHeight + window.scrollY) / document.body.offsetHeight;
+    if (scrollPercent > 0.95 && !triggered) {
+      triggered = true;
+      // Flash eclair
+      flash.style.opacity = '0.5';
+      flash.style.background = 'red';
+      setTimeout(() => {
+        flash.style.opacity = '0';
+        flash.style.background = 'white';
+      }, 50);
+    }
+  });
+
+  // Flashs de couleur aleatoires (rouge sang)
+  setInterval(() => {
+    if (Math.random() > 0.95) {
+      archive.style.background = '#200';
+      setTimeout(() => archive.style.background = '#050505', 50);
+    }
+  }, 100);
+
+  // Tressautement du texte (Glitch)
+  setInterval(() => {
+    if (Math.random() > 0.9) {
+      archive.style.transform = `translate(${Math.random()*2-1}px, ${Math.random()*2-1}px)`;
+      setTimeout(() => archive.style.transform = 'none', 30);
+    }
+  }, 50);
+
+  // Message console subliminal
+  setInterval(() => {
+    if (Math.random() > 0.98) {
+      console.warn("%cIL EST DANS LA PIECE AVEC TOI", "color:red; font-size:20px; font-weight:bold;");
+    }
+  }, 2000);
+
+  // Initialisation des nouveaux effets
+  startWhispers();
+  startTextCorruption();
+  startGhostTerminal();
+  startTabPanic();
+  startFollowingEyes();
+  startInfiniteArchive();
+  startCameraFlash();
+  setTimeout(spawnImpossibleModal, 15000); // Apparait apres 15 sec
+}
+
+function startFollowingEyes() {
+  const eyeLeft = document.createElement('div');
+  const eyeRight = document.createElement('div');
+  const style = "position:fixed; width:4px; height:4px; background:#f00; border-radius:50%; z-index:9997; opacity:0; transition: opacity 0.5s; box-shadow: 0 0 5px #f00;";
+  eyeLeft.style.cssText = style;
+  eyeRight.style.cssText = style;
+  document.body.appendChild(eyeLeft);
+  document.body.appendChild(eyeRight);
+
+  window.addEventListener('mousemove', (e) => {
+    // Les yeux apparaissent loin du curseur
+    const dist = 300;
+    const angle = Math.atan2(e.clientY - window.innerHeight/2, e.clientX - window.innerWidth/2);
+    const ex = window.innerWidth/2 + Math.cos(angle + Math.PI) * dist;
+    const ey = window.innerHeight/2 + Math.sin(angle + Math.PI) * dist;
+    
+    eyeLeft.style.left = ex - 10 + 'px';
+    eyeLeft.style.top = ey + 'px';
+    eyeRight.style.left = ex + 10 + 'px';
+    eyeRight.style.top = ey + 'px';
+    
+    // Disparaissent si on approche trop
+    const mouseDist = Math.hypot(e.clientX - ex, e.clientY - ey);
+    eyeLeft.style.opacity = mouseDist < 150 ? '0' : '0.6';
+    eyeRight.style.opacity = mouseDist < 150 ? '0' : '0.6';
+  });
+}
+
+function startInfiniteArchive() {
+  const horrorSnippets = [
+    "Le sujet #90 a commence a parler en arriere.",
+    "L'oxygene a ete remplace par du gaz de rire. Ils ne rient plus.",
+    "Pourquoi grattez-vous le mur ?",
+    "La porte est verrouillee de l'exterieur. Et de l'interieur.",
+    "Il y a quelqu'un sous votre lit. Ne verifiez pas.",
+    "ERROR: SOUL_REJECTED",
+    "La chair est une prison de carbone."
+  ];
+
+  window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+      const newDiv = document.createElement('div');
+      newDiv.style.cssText = "margin-top:100px; padding:20px; border-left:1px solid #200;";
+      newDiv.innerHTML = `
+        <h3 style="color:#500;">DOSSIER_ADDITIONNEL_${Math.floor(Math.random()*9999)}</h3>
+        <p>${horrorSnippets[Math.floor(Math.random()*horrorSnippets.length)]}</p>
+        <p style="font-size:0.7em; color:#222;">TIMESTAMP: ${new Date().toLocaleTimeString()}</p>
+      `;
+      document.getElementById('archive').appendChild(newDiv);
+    }
+  });
+}
+
+function startCameraFlash() {
+  setInterval(() => {
+    if (Math.random() > 0.98) {
+      const flashEle = document.createElement('div');
+      flashEle.style.cssText = "position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:30000; opacity:0.8; pointer-events:none;";
+      document.body.appendChild(flashEle);
+      setTimeout(() => flashEle.remove(), 40);
+    }
+  }, 5000);
+}
+
+function startTabPanic() {
+  const titles = ["ARCHIVE_CORROMPUE", "REGARDE_DERRIERE_TOI", "JE_TE_VOIS", "SORTIR_EST_IMPOSSIBLE"];
+  setInterval(() => {
+    document.title = titles[Math.floor(Math.random() * titles.length)];
+  }, 4000);
+}
+
+function spawnImpossibleModal() {
+  const modal = document.createElement('div');
+  modal.style.cssText = "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#111; border:3px solid #f00; padding:30px; z-index:20000; color:#f00; text-align:center; font-family:monospace; box-shadow: 0 0 50px #f00;";
+  modal.innerHTML = `
+    <h2 style="margin-top:0;">ALERTE SYSTEME</h2>
+    <p>Voulez-vous quitter cette session ?<br>Tout progres sera perdu dans le vide.</p>
+    <div style="margin-top:20px;">
+      <button id="btn-oui" style="padding:10px 20px; background:#400; color:#fff; border:1px solid #f00; cursor:none; position:relative;">OUI</button>
+      <button id="btn-non" style="padding:10px 20px; background:#000; color:#fff; border:1px solid #333; cursor:none;">NON</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const btnOui = document.getElementById('btn-oui');
+  btnOui.addEventListener('mouseover', () => {
+    btnOui.style.position = 'fixed';
+    btnOui.style.left = Math.random() * 80 + 10 + '%';
+    btnOui.style.top = Math.random() * 80 + 10 + '%';
+  });
+
+  document.getElementById('btn-non').addEventListener('click', () => {
+    modal.innerHTML = "<h3>CHOIX ENREGISTRE. VOUS NE SORTIREZ JAMAIS.</h3>";
+    setTimeout(() => modal.remove(), 2000);
+  });
+}
+
+function startWhispers() {
+  const words = ["DERRIERE TOI", "REGARDE", "ICI", "S'IL TE PLAIT", "AU SECOURS", "NE BOUGE PAS"];
+  setInterval(() => {
+    if (Math.random() > 0.9) {
+      const whisper = document.createElement('div');
+      whisper.innerText = words[Math.floor(Math.random() * words.length)];
+      whisper.style.position = 'fixed';
+      whisper.style.left = Math.random() * 80 + 10 + '%';
+      whisper.style.top = Math.random() * 80 + 10 + '%';
+      whisper.style.color = '#100'; // Presque invisible
+      whisper.style.fontSize = Math.random() * 20 + 10 + 'px';
+      whisper.style.zIndex = '9998';
+      whisper.style.pointerEvents = 'none';
+      whisper.style.fontFamily = 'serif';
+      document.body.appendChild(whisper);
+      setTimeout(() => whisper.remove(), 600);
+    }
+  }, 1000);
+}
+
+function startTextCorruption() {
+  const symbols = "?????";
+  const pElements = document.querySelectorAll('#archive p, #archive h2');
+  
+  setInterval(() => {
+    const el = pElements[Math.floor(Math.random() * pElements.length)];
+    const originalText = el.innerText;
+    if (originalText.length < 5) return;
+    
+    const pos = Math.floor(Math.random() * originalText.length);
+    const newText = originalText.substring(0, pos) + symbols[Math.floor(Math.random() * symbols.length)] + originalText.substring(pos + 1);
+    el.innerText = newText;
+    
+    setTimeout(() => el.innerText = originalText, 100);
+  }, 200);
+}
+
+function startGhostTerminal() {
+  const terminal = document.createElement('div');
+  terminal.style.position = 'fixed';
+  terminal.style.bottom = '10px';
+  terminal.style.right = '10px';
+  terminal.style.width = '250px';
+  terminal.style.height = '100px';
+  terminal.style.background = 'rgba(0,0,0,0.8)';
+  terminal.style.border = '1px solid #200';
+  terminal.style.color = '#500';
+  terminal.style.fontSize = '10px';
+  terminal.style.padding = '5px';
+  terminal.style.overflow = 'hidden';
+  terminal.style.zIndex = '10001';
+  terminal.id = "ghost-terminal";
+  document.body.appendChild(terminal);
+
+  const logs = [
+    "Scanning heartbeat...",
+    "Pupil dilation detected: HIGH",
+    "Adrenaline spike recorded.",
+    "System sync: 92%",
+    "Uploading consciousness...",
+    "Host location: CONFIRMED",
+    "Do not look back.",
+    "ERROR: Soul not found."
+  ];
+
+  let i = 0;
+  setInterval(() => {
+    const log = document.createElement('div');
+    log.innerText = "> " + logs[Math.floor(Math.random() * logs.length)];
+    terminal.appendChild(log);
+    if (terminal.childNodes.length > 8) terminal.removeChild(terminal.firstChild);
+  }, 3000);
+}
+
+// --- AUDIO --------------------------------------------------------------------
+const screamerSound = new Audio('../assets/sounds/screamer/le_saut_de_peur.wav');
+screamerSound.preload = 'auto';
+screamerSound.loop = false;
+
+const ambientSound = new Audio('../assets/sounds/screamer/fond.wav');
+ambientSound.preload = 'auto';
+ambientSound.loop = true;
+ambientSound.volume = 0.12;
+
+let archiveIsVisible = false;
+let screamerIsFinished = false;
+let ambientStarted = false;
+
+function maybeStartAmbientSound() {
+  if (!archiveIsVisible || !screamerIsFinished || ambientStarted) return;
+  ambientStarted = true;
+  ambientSound.currentTime = 0;
+  ambientSound.play().catch(e => console.error("Erreur de lecture du fond sonore:", e));
+}
+
+screamerSound.addEventListener('ended', () => {
+  screamerIsFinished = true;
+  maybeStartAmbientSound();
+});
+
+// --- LANCEMENT ----------------------------------------------------------------
+const videoGate = document.getElementById('video-gate');
+const entryVideo = document.getElementById('entry-video');
+const intro = document.getElementById('intro');
+let sequenceStarted = false;
+let videoCanBeSkipped = false;
+
+if (window.location.pathname.toLowerCase().endsWith('/screamer/hidden.html')) {
+  history.replaceState(null, '', '/screamer');
+}
+
+function showContinuePrompt() {
+  if (intro.style.display === 'flex') return;
+
+  if (videoGate) {
+    videoGate.classList.add('is-ending');
+    setTimeout(() => videoGate.remove(), 700);
+  }
+
+  intro.style.display = 'flex';
+}
+
+if (videoGate && entryVideo) {
+  entryVideo.addEventListener('ended', showContinuePrompt, { once: true });
+  entryVideo.addEventListener('error', () => setTimeout(showContinuePrompt, 800), { once: true });
+
+  setTimeout(() => {
+    videoCanBeSkipped = true;
+  }, 1400);
+
+  videoGate.addEventListener('click', () => {
+    if (!videoCanBeSkipped) return;
+    entryVideo.pause();
+    showContinuePrompt();
+  });
+
+  const playAttempt = entryVideo.play();
+
+  if (playAttempt && typeof playAttempt.catch === 'function') {
+    playAttempt.catch(() => setTimeout(showContinuePrompt, 800));
+  }
+} else {
+  showContinuePrompt();
+}
+
+intro.addEventListener('click', () => {
+  if (sequenceStarted) return;
+  sequenceStarted = true;
+
+  screamerSound.currentTime = 0;
+  screamerIsFinished = false;
+  screamerSound.play().catch(e => {
+    console.error("Erreur de lecture audio:", e);
+    screamerIsFinished = true;
+    maybeStartAmbientSound();
+  });
+
+  // Lancement et disparition instantanes
+  intro.style.display = 'none';
+  runSequence();
+});
+</script>
+</body>
+</html>

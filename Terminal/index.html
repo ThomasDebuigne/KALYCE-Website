@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Terminal / KALYCE</title>
+    <link rel="stylesheet" href="/css/terminal.css">
+    <script src="/js/config.js" defer></script>
+    <script src="/js/terminal.js" defer></script>
+    <script src="/js/main.js" defer></script>
+  </head>
+
+  <body data-page="terminal">
+    <div class="site-shell terminal-shell">
+      <header class="topbar">
+        <a class="brand glitch-text" href="/" data-text="KALYCE">
+          <img class="header-logo" src="/assets/images/kalyce.png" alt="Logo KALYCE">
+          <span>KALYCE</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigation principale">
+          <a href="/" data-nav="home">Accueil</a>
+          <a href="/Apply" data-nav="apply">Rejoignez-nous</a>
+          <a href="/Terminal" data-nav="terminal" class="active">Terminal</a>
+        </nav>
+      </header>
+
+      <main class="terminal-bunker">
+        <section class="access-strip" aria-label="État du terminal">
+          <span>ACCÈS RESTREINT</span>
+          <span>SESSION NON CERTIFIÉE</span>
+          <span class="blink">SURVEILLANCE ACTIVE</span>
+        </section>
+
+        <section class="terminal-frame" aria-labelledby="terminal-title">
+          <div class="terminal-frame-header">
+            <div>
+              <p class="system-label">/KALYCE/internal/restricted_node</p>
+              <h1 id="terminal-title" class="glitch-text" data-text="INTERFACE VERROUILLÉE">
+                INTERFACE VERROUILLÉE
+              </h1>
+            </div>
+
+            <div class="terminal-seal">
+              <span>KSD</span>
+              <strong>04</strong>
+            </div>
+          </div>
+
+          <div class="terminal-warning-panel">
+            <p>
+              L'accès à cette interface est enregistré. Toute tentative de consultation non autorisée
+              sera conservée dans un journal interne.
+            </p>
+
+            <p class="cold-copy">
+              Aucune assistance ne sera fournie. Aucune liste ne sera affichée.
+            </p>
+          </div>
+
+          <div class="terminal-console-shell">
+            <div class="console-topline">
+              <span>canal : maintenance</span>
+              <span>état : instable</span>
+              <span>retour : différé</span>
+            </div>
+
+            <section class="terminal-window static-terminal" data-terminal-screen></section>
+          </div>
+        </section>
+
+        <section class="signal-board" aria-label="Informations système">
+          <article>
+            <span class="signal-index">01</span>
+            <strong>journal</strong>
+            <p>Écriture silencieuse en cours.</p>
+          </article>
+
+          <article>
+            <span class="signal-index">02</span>
+            <strong>mémoire</strong>
+            <p>Fragments non indexés.</p>
+          </article>
+
+          <article>
+            <span class="signal-index">03</span>
+            <strong>réponse</strong>
+            <p>Autorisation variable.</p>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

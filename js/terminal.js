@@ -30,7 +30,7 @@
     ],
 
     application: [
-      "Formulaire actif : apply.html",
+      "Formulaire actif : /Apply",
       "Transmission réseau : active",
       "Les candidatures sont enregistrées.",
       "Poste proposé : surveillance nocturne, 00:00-06:00.",
@@ -40,7 +40,7 @@
     failed: [
       "Dossiers incomplets détectés.",
       "Nombre exact : non affiché",
-      "Index local : /entities.html",
+      "Index local : /Entities",
       "Statut : archive non référencée",
       "Certaines erreurs ont continué après leur clôture."
     ],

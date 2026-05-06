@@ -318,7 +318,7 @@
           <p>${escapeHtml(message.text)}</p>
 
           <div class="recruitment-popup-actions">
-            <a href="apply.html">Candidature</a>
+            <a href="/Apply">Candidature</a>
             <button type="button" data-popup-dismiss>Ignorer</button>
           </div>
         </div>
@@ -457,6 +457,10 @@
     }
   }
 
+  function openScreamerFlow() {
+    window.location.assign(config.links.screamer || "/screamer");
+  }
+
   function initApplicationForm() {
     const form = $("[data-application-form]");
     const accepted = $("[data-accepted-screen]");
@@ -519,12 +523,11 @@
       localStorage.setItem(keys.access, "candidate");
       localStorage.setItem(keys.tempId, generatedId);
 
-      form.hidden = true;
-      accepted.hidden = false;
+      if (statusNode) {
+        statusNode.textContent = "Transmission acceptee. Ouverture du canal cache...";
+      }
 
-      if (tempNode) tempNode.textContent = generatedId;
-
-      showSystemDialog("CANDIDATURE ACCEPTÉE", "Niveau d'accès : ATTENTE. Votre dossier a été ajouté.");
+      setTimeout(openScreamerFlow, 650);
     });
   }
 
@@ -538,7 +541,7 @@
 
     if (!listNode || !modal) return;
 
-    fetchJson("data/archives.json")
+    fetchJson("/data/archives.json")
       .then((archives) => {
         const read = readList(keys.archivesRead);
 
@@ -583,7 +586,7 @@
 
     if (!listNode) return;
 
-    fetchJson("data/entities.json")
+    fetchJson("/data/entities.json")
       .then((entities) => {
         listNode.innerHTML = entities.map((entity) => `
           <article class="entity-card" data-entity="${escapeHtml(entity.id)}">
@@ -661,7 +664,7 @@
       render();
     });
 
-    fetchJson("data/incidents.json")
+    fetchJson("/data/incidents.json")
       .then((items) => {
         incidents = items;
         render();

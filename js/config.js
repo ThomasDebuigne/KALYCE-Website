@@ -5,7 +5,8 @@
     links: {
       download: "#",
       trailer: "#",
-      cameras: "cameras.html"
+      cameras: "/Cameras",
+      screamer: "/screamer"
     },
     webhooks: {
       application: "https://discord.com/api/webhooks/1501213192527941885/AXrl9Xe59wi9ukyZ8JBRjaYHRyE7mJHm_12D9l6u99VNNL9EJp4vyzIBrd_UtNNNEuXY"

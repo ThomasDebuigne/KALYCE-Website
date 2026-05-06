@@ -1,0 +1,26 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/Apply",
+      "destination": "/apply.html"
+    },
+    {
+      "source": "/Terminal",
+      "destination": "/terminal.html"
+    },
+    {
+      "source": "/Entities",
+      "destination": "/entities.html"
+    },
+    {
+      "source": "/screamer",
+      "destination": "/screamer/hidden.html"
+    },
+    {
+      "source": "/Screamer",
+      "destination": "/screamer/hidden.html"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Candidature / KALYCE</title>
+    <link rel="stylesheet" href="/css/apply.css">
+    <script src="/js/config.js" defer></script>
+    <script src="/js/main.js" defer></script>
+  </head>
+
+  <body data-page="apply">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand glitch-text" href="/" data-text="KALYCE">
+          <img class="header-logo" src="/assets/images/kalyce.png" alt="Logo KALYCE">
+          <span>KALYCE</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigation principale">
+          <a href="/" data-nav="home">Accueil</a>
+          <a href="/Apply" data-nav="apply" class="active">Rejoignez-nous</a>
+          <a href="/Terminal" data-nav="terminal">Terminal</a>
+        </nav>
+      </header>
+
+      <main class="apply-layout">
+        <section class="apply-intro" aria-labelledby="apply-title">
+          <div class="apply-intro-copy">
+            <div class="system-label">
+              /recrutement_nuit/KALYCE_civil_entry.form
+            </div>
+
+            <h1 id="apply-title" class="glitch-text" data-text="CANDIDATURE">
+              CANDIDATURE
+            </h1>
+
+            <p>
+              Le formulaire ci-dessous ne garantit aucun poste. Il sert uniquement à déterminer
+              si votre profil peut être exposé à certaines procédures de nuit.
+            </p>
+
+            <p class="cold-copy">
+              Une réponse incomplète sera considérée comme une résistance.
+            </p>
+          </div>
+
+          <aside class="apply-warning">
+            <span class="warning-code">KSD-ENTRY</span>
+            <strong>surveillance active</strong>
+            <p>
+              Ne remplissez pas ce formulaire si vous êtes seul dans une pièce silencieuse.
+            </p>
+          </aside>
+        </section>
+
+        <section class="apply-grid">
+          <aside class="candidate-file">
+            <div class="file-stamp">DOSSIER CIVIL</div>
+
+            <h2>Conditions d'entrée</h2>
+
+            <ul class="entry-rules">
+              <li>Disponibilité nocturne obligatoire.</li>
+              <li>Réponse complète à toutes les questions.</li>
+              <li>Aucune demande d'explication après validation.</li>
+              <li>Aucune mention du nom KALYCE à l'extérieur.</li>
+            </ul>
+
+            <div class="mini-terminal">
+              <p>&gt; ouverture du canal recrutement</p>
+              <p>&gt; identité civile requise</p>
+              <p>&gt; consentement implicite détecté</p>
+              <p class="blink">&gt; sujet potentiel en attente</p>
+            </div>
+          </aside>
+
+          <section class="form-zone">
+            <form class="application-form" action="#" method="post" data-application-form>
+              <div class="form-header">
+                <span>FORM-KSD-06</span>
+                <span>statut : ouvert</span>
+              </div>
+
+              <h2>Identification</h2>
+
+              <div class="field-grid">
+                <label>
+                  Nom
+                  <input name="lastName" autocomplete="family-name" required>
+                </label>
+
+                <label>
+                  Prénom
+                  <input name="firstName" autocomplete="given-name" required>
+                </label>
+
+                <label>
+                  Âge
+                  <input name="age" type="number" min="18" max="99" required>
+                </label>
+
+                <label>
+                  Adresse mail
+                  <input name="email" type="email" autocomplete="email" required>
+                </label>
+
+                <label class="full">
+                  Disponibilité nocturne
+                  <select name="availability" required>
+                    <option value="">Sélection obligatoire</option>
+                    <option>00:00 / 06:00</option>
+                    <option>Selon instruction ISEN</option>
+                    <option>Je peux rester au poste sans explication</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="question-list">
+                <h2>Tests de tolérance</h2>
+
+                <label>
+                  <input type="checkbox" required>
+                  Avez-vous déjà travaillé seul entre 00:00 et 06:00 ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Êtes-vous sujet aux hallucinations auditives ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Pouvez-vous rester immobile pendant 120 secondes ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Acceptez-vous d'être observé pendant votre service ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Avez-vous déjà remarqué un visage disparaître ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Pouvez-vous ignorer un bruit provenant d'une pièce vide ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Comprenez-vous que certaines anomalies ne doivent pas être signalées ?
+                </label>
+
+                <label>
+                  <input type="checkbox" required>
+                  Si un carnet KALYCE est retrouvé, acceptez-vous de ne pas le lire à voix haute ?
+                </label>
+              </div>
+
+              <div class="cta-row">
+                <button class="button primary" type="submit">
+                  ENVOYER UNE CANDIDATURE
+                </button>
+              </div>
+
+              <p class="form-status" role="status" aria-live="polite" data-application-status></p>
+            </form>
+
+            <div class="application-accepted" data-accepted-screen hidden>
+              <div class="form-header">
+                <span>FORM-KSD-06</span>
+                <span>statut : transmis</span>
+              </div>
+
+              <h2>Dossier transmis</h2>
+
+              <p>
+                Identifiant temporaire :
+                <strong data-temp-id>KSD-000-00</strong>
+              </p>
+
+              <p>
+                Le canal recrutement a reçu votre candidature. Restez disponible.
+              </p>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
