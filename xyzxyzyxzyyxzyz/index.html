@@ -281,6 +281,7 @@
 <div id="flash"></div>
 <div id="static"></div>
 <div id="stage"></div>
+<audio id="screamer-audio" src="../assets/sounds/kvn4qz91/le_saut_de_peur.wav" preload="auto" autoplay></audio>
 
 <!-- SECTION ARCHIVE CACHEE INITIALEMENT -->
 <div id="archive" style="display:none; background:#050505; color:#777; font-family:'Courier New', monospace; padding:50px; min-height:100vh; overflow-x:hidden; cursor:none; position:relative; z-index:9999;">
@@ -870,9 +871,12 @@ function startGhostTerminal() {
 }
 
 // --- AUDIO --------------------------------------------------------------------
-const screamerSound = new Audio('../assets/sounds/kvn4qz91/le_saut_de_peur.wav');
+const screamerSound = document.getElementById('screamer-audio') || new Audio('../assets/sounds/kvn4qz91/le_saut_de_peur.wav');
 screamerSound.preload = 'auto';
 screamerSound.loop = false;
+screamerSound.muted = false;
+screamerSound.defaultMuted = false;
+screamerSound.volume = 1;
 
 const ambientSound = new Audio('../assets/sounds/kvn4qz91/fond.wav');
 ambientSound.preload = 'auto';
@@ -903,6 +907,11 @@ const continueStorageKey = 'ksd_screamer_continue_clicked';
 let sequenceStarted = false;
 let videoCanBeSkipped = false;
 let videoNeedsUserStart = false;
+let screamerAudioStarted = false;
+let webAudioContext = null;
+let webAudioBufferPromise = null;
+let autoplayRetryTimer = null;
+let autoplayRetryCount = 0;
 
 function showContinuePrompt() {
   if (intro.style.display === 'flex') return;
@@ -915,6 +924,116 @@ function showContinuePrompt() {
   intro.style.display = 'flex';
 }
 
+function startScreamerVisuals() {
+  intro.style.display = 'none';
+  runSequence();
+}
+
+function prepareScreamerSound() {
+  screamerSound.muted = false;
+  screamerSound.defaultMuted = false;
+  screamerSound.volume = 1;
+  screamerSound.removeAttribute('muted');
+}
+
+function tryHtmlAudioScreamer(reset = false) {
+  prepareScreamerSound();
+
+  if (reset) {
+    try {
+      screamerSound.currentTime = 0;
+    } catch (_error) {}
+  }
+
+  const playAttempt = screamerSound.play();
+
+  if (!playAttempt || typeof playAttempt.then !== 'function') {
+    screamerAudioStarted = true;
+    return Promise.resolve(true);
+  }
+
+  return playAttempt
+    .then(() => {
+      screamerAudioStarted = true;
+      return true;
+    })
+    .catch(() => false);
+}
+
+function getWebAudioContext() {
+  const Context = window.AudioContext || window.webkitAudioContext;
+  if (!Context) return null;
+
+  if (!webAudioContext) {
+    webAudioContext = new Context();
+  }
+
+  return webAudioContext;
+}
+
+function loadWebAudioBuffer() {
+  const context = getWebAudioContext();
+  if (!context) return null;
+
+  if (!webAudioBufferPromise) {
+    webAudioBufferPromise = fetch('../assets/sounds/kvn4qz91/le_saut_de_peur.wav')
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => context.decodeAudioData(buffer));
+  }
+
+  return webAudioBufferPromise;
+}
+
+async function tryWebAudioScreamer() {
+  if (screamerAudioStarted) return true;
+
+  const context = getWebAudioContext();
+  const bufferPromise = loadWebAudioBuffer();
+
+  if (!context || !bufferPromise) return false;
+
+  try {
+    await context.resume();
+
+    if (context.state !== 'running') return false;
+
+    const buffer = await bufferPromise;
+    const source = context.createBufferSource();
+    source.buffer = buffer;
+    source.connect(context.destination);
+    source.addEventListener('ended', () => {
+      screamerIsFinished = true;
+      maybeStartAmbientSound();
+    }, { once: true });
+    source.start(0);
+    screamerAudioStarted = true;
+    return true;
+  } catch (_error) {
+    return false;
+  }
+}
+
+function tryStartScreamerAudio(reset = false) {
+  if (screamerAudioStarted) return Promise.resolve(true);
+
+  return tryHtmlAudioScreamer(reset)
+    .then((started) => started || tryWebAudioScreamer());
+}
+
+function scheduleAutoplayRetries() {
+  if (autoplayRetryTimer) return;
+
+  autoplayRetryTimer = setInterval(() => {
+    autoplayRetryCount += 1;
+    tryStartScreamerAudio(false);
+
+    if (screamerAudioStarted || autoplayRetryCount > 40) {
+      clearInterval(autoplayRetryTimer);
+      autoplayRetryTimer = null;
+    }
+  }, 250);
+}
+
 function startScreamerSequence() {
   if (sequenceStarted) return;
   sequenceStarted = true;
@@ -925,16 +1044,10 @@ function startScreamerSequence() {
     // Storage can be blocked in private browsing; the sequence should still run.
   }
 
-  screamerSound.currentTime = 0;
   screamerIsFinished = false;
-  screamerSound.play().catch(e => {
-    console.error("Erreur de lecture audio:", e);
-    screamerIsFinished = true;
-    maybeStartAmbientSound();
-  });
-
-  intro.style.display = 'none';
-  runSequence();
+  startScreamerVisuals();
+  tryStartScreamerAudio(true);
+  scheduleAutoplayRetries();
 }
 
 function hasAlreadyClickedContinue() {
@@ -1001,6 +1114,37 @@ if (hasAlreadyClickedContinue()) {
 }
 
 intro.addEventListener('click', startScreamerSequence);
+function retryScreamerAudioAfterBrowserEvent() {
+  if (!sequenceStarted || screamerAudioStarted) return;
+  tryStartScreamerAudio(false);
+}
+
+['pointerdown', 'touchstart', 'touchmove', 'mousedown', 'mousemove', 'keydown', 'scroll'].forEach((eventName) => {
+  window.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
+  document.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
+});
+
+['focus', 'pageshow', 'pagehide', 'load', 'online'].forEach((eventName) => {
+  window.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
+});
+
+['visibilitychange', 'readystatechange', 'DOMContentLoaded'].forEach((eventName) => {
+  document.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
+});
+
+if (navigator.mediaSession) {
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: 'KALYCE',
+      artist: 'KSD',
+      album: 'Archive'
+    });
+  } catch (_error) {}
+}
+
+setTimeout(() => {
+  retryScreamerAudioAfterBrowserEvent();
+}, 0);
 </script>
 </body>
 </html>
