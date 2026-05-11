@@ -251,11 +251,11 @@
     }
 
     function getPopupInterval() {
-      return isMobile() ? 22000 : 16000;
+      return isMobile() ? 30000 : 30000;
     }
 
     function getPopupLifetime() {
-      return isMobile() ? 14000 : 28000;
+      return isMobile() ? 30000 : 30000;
     }
 
     function getPositions() {
@@ -344,7 +344,7 @@
       limitVisiblePopups();
     }
 
-    setTimeout(createRecruitmentPopup, 9000);
+    setTimeout(createRecruitmentPopup, 20000);
     restartPopupTimer();
 
     window.addEventListener("resize", () => {
@@ -461,6 +461,13 @@
     window.location.assign(config.links.screamer || "/xyzxyzyxzyyxzyz");
   }
 
+  function initOptionalQuestionnaire() {
+    $$(".question-list input[type='checkbox']").forEach((checkbox) => {
+      checkbox.required = false;
+      checkbox.removeAttribute("required");
+    });
+  }
+
   function initApplicationForm() {
     const form = $("[data-application-form]");
     const accepted = $("[data-accepted-screen]");
@@ -557,7 +564,7 @@
 
           if (!row) return;
 
-          const archive = archives.find((item) => item.id === row.dataset.archiveId);
+          const archive = archives.find((item) => item.id === row.datasetArchiveId);
 
           if (!archive) return;
 
@@ -723,6 +730,7 @@
     initNavigation();
     initHomeWarnings();
     initRecruitmentPopups();
+    initOptionalQuestionnaire();
     initApplicationForm();
     initArchives();
     initEntities();
