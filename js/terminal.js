@@ -4,116 +4,61 @@
       "Commandes disponibles :",
       "status",
       "kalyce",
-      "application",
-      "failed",
-      "sealed",
       "deviance",
-      "67",
+      "room1",
+      "papa",
+      "patiente001",
       "clear"
     ],
 
     status: [
       "Système : ancien",
-      "Interface publique : volontairement limitée",
-      "Accès profond : verrouillé",
-      "Archives : incomplètes",
+      "Site : non référencé",
+      "Accès : ciblé",
       "Observation : active",
-      "Dernière synchronisation : inconnue"
+      "ROOM1 : terminé",
+      "Prochaine ouverture : 28/05/2026"
     ],
 
     kalyce: [
-      "KALYCE n'est pas née d'une promesse.",
-      "Elle est apparue dans les marges d'un dossier judiciaire.",
-      "Recherche privée. Financement discret. Résultats présentés avant vérification.",
-      "Les rapports publics parlent de progrès.",
-      "Les rapports internes parlent moins."
-    ],
-
-    application: [
-      "Formulaire actif : /xrz9qwv2",
-      "Transmission réseau : active",
-      "Les candidatures sont enregistrées.",
-      "Poste proposé : surveillance nocturne, 00:00-06:00.",
-      "Expérience requise : rester calme lorsque les consignes changent seules."
-    ],
-
-    failed: [
-      "Dossiers incomplets détectés.",
-      "Nombre exact : non affiché",
-      "Index local : /qzv8n4l2",
-      "Statut : archive non référencée",
-      "Certaines erreurs ont continué après leur clôture."
-    ],
-
-    sealed: [
-      "DOSSIER SCELLÉ",
-      "Nom : [SUPPRIMÉ]",
-      "Origine : incohérente",
-      "Classement : erreur persistante",
-      "Accès refusé.",
-      "Instruction : ne pas compléter ce qui manque."
+      "Aucune trace publique.",
+      "KALYCE existe seulement dans les dossiers qui ne sortent pas.",
+      "Origine supposée : 1963.",
+      "Groupe clandestin dédié à une science sans limite morale.",
+      "Ne confirmez jamais son existence."
     ],
 
     deviance: [
       "Protocole reconnu.",
-      "DEVIANCE n'est pas un surnom.",
-      "DEVIANCE n'est pas un projet public.",
-      "DEVIANCE commence quand l'observation cesse d'être passive.",
-      "État : dormant / instable / attendu"
+      "DEVIANCE désigne ce qui dépasse les prévisions.",
+      "Les réactions ne sont plus seulement expérimentales.",
+      "Certains sujets ont été reclassés.",
+      "Statut : instable."
     ],
 
-    entity: [
-      "Terme invalide dans cette interface.",
-      "Les entrées individuelles ne sont pas disponibles.",
-      "Utilisez les archives autorisées.",
-      "Ou n'utilisez rien."
+    room1: [
+      "ROOM1 : accord confidentiel KALYCE / ISEN.",
+      "Début : 20/05/2024.",
+      "Fin officielle : 20/05/2026.",
+      "Objet déclaré : projet technologique.",
+      "Objet réel : observation et altération de sujets humains.",
+      "Anomalies signalées avant clôture."
     ],
 
-    andy: [
-      "Entrée retrouvée : ANDY.",
-      "Petite silhouette. Trop immobile hors champ.",
-      "Elle suit ce qui fait du bruit.",
-      "Ne laissez pas le silence choisir à votre place."
+    papa: [
+      "Référence reconnue : Monsieur X.",
+      "1963 : expérience sur sa propre fille.",
+      "1965 : condamnation à mort.",
+      "Son nom reste lié à la fondation de KALYCE.",
+      "Ne pas employer hors contexte."
     ],
 
-    alice: [
-      "Entrée retrouvée : ALICE.",
-      "Posture de mannequin. Distance instable.",
-      "Elle bouge surtout quand personne ne confirme sa position.",
-      "Les contrôles trop espacés aggravent les erreurs."
-    ],
-
-    faceless: [
-      "Entrée retrouvée : FACELESS.",
-      "Taille humaine. Aucun visage exploitable.",
-      "L'image se dégrade quand on insiste.",
-      "Certaines présences doivent seulement être évitées."
-    ],
-
-    chimera: [
-      "Entrée retrouvée : CHIMERA.",
-      "Assemblage massif. Forme incohérente.",
-      "L'écran principal semble l'attirer.",
-      "Trop de lumière facilite son approche."
-    ],
-
-    daughter: [
-      "Entrée protégée.",
-      "Patiente initiale : non nommée",
-      "Statut public : victime",
-      "Statut interne : contradiction",
-      "Aucune désignation personnelle ne sera affichée."
-    ],
-
-    67: [
-      "67.",
-      "six... seven...",
-      "Commande acceptée trop vite.",
-      "Analyse annulée : le système a reconnu la référence.",
-      "Aucune donnée utile. Seulement un écho internet.",
-      "Rapport interne : le technicien a soufflé du nez.",
-      "Ne recommence pas.",
-      "Ou recommence. Le terminal juge, mais il comprend."
+    patiente001: [
+      "PATIENTE 001.",
+      "Sujet médiatisé en 1963.",
+      "Statut public : victime.",
+      "Statut interne : point d'origine.",
+      "Son dossier a inspiré ceux qui ont fondé KALYCE."
     ]
   };
 
@@ -148,7 +93,7 @@
       "Connexion locale : KSD-LOCAL-51",
       "Session limitée.",
       "Tapez help.",
-      "Les noms ne sont pas des commandes."
+      "Certaines entrées n'existent que si vous savez déjà quoi chercher."
     ], "system");
 
     form.addEventListener("submit", (event) => {
@@ -168,8 +113,8 @@
       append(
         responses[command] || [
           "Commande inconnue.",
-          "Cette requête ne correspond à aucune archive publique.",
-          "Ou elle a été retirée avant votre arrivée."
+          "Aucune archive publique associée.",
+          "Requête ignorée."
         ],
         responses[command] ? "system" : "error"
       );
