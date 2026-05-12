@@ -82,6 +82,14 @@
                 <span>statut : ouvert</span>
               </div>
 
+              <!-- Honeypot anti-bot field — invisible to humans -->
+              <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;">
+                <label>
+                  Ne remplissez pas ce champ
+                  <input name="website" type="text" tabindex="-1" autocomplete="off">
+                </label>
+              </div>
+
               <h2>Identification</h2>
 
               <div class="field-grid">

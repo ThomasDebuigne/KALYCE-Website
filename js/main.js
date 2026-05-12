@@ -367,93 +367,34 @@
       });
   }
 
-  function limitDiscordText(value, maxLength = 1024) {
-    const text = String(value || "").trim();
+  async function sendApplicationToProxy(form, generatedId) {
+    const apiUrl = config.api && config.api.submitApplication;
 
-    if (!text) return "Non renseigné";
-    if (text.length <= maxLength) return text;
+    if (!apiUrl) return;
 
-    return `${text.slice(0, maxLength - 3)}...`;
-  }
-
-  function buildApplicationWebhookPayload(form, generatedId) {
-    const firstName = getFormValue(form, "firstName");
-    const lastName = getFormValue(form, "lastName");
-    const checkedQuestions = getCheckedQuestions(form);
-
-    return {
-      username: "KALYCE Recrutement",
-      content: `Nouvelle candidature reçue : ${generatedId}`,
-      allowed_mentions: {
-        parse: []
-      },
-      embeds: [
-        {
-          title: "Nouvelle candidature KALYCE",
-          color: 0xff2020,
-          timestamp: new Date().toISOString(),
-          fields: [
-            {
-              name: "Identifiant",
-              value: generatedId,
-              inline: true
-            },
-            {
-              name: "Nom",
-              value: limitDiscordText(lastName, 256),
-              inline: true
-            },
-            {
-              name: "Prénom",
-              value: limitDiscordText(firstName, 256),
-              inline: true
-            },
-            {
-              name: "Âge",
-              value: limitDiscordText(getFormValue(form, "age"), 256),
-              inline: true
-            },
-            {
-              name: "Email",
-              value: limitDiscordText(getFormValue(form, "email"), 256),
-              inline: true
-            },
-            {
-              name: "Disponibilité nocturne",
-              value: limitDiscordText(getFormValue(form, "availability"), 256),
-              inline: true
-            },
-            {
-              name: "Tests validés",
-              value: limitDiscordText(checkedQuestions.map((question) => `- ${question}`).join("\n")),
-              inline: false
-            },
-            {
-              name: "Origine",
-              value: limitDiscordText(window.location.href),
-              inline: false
-            }
-          ]
-        }
-      ]
+    const payload = {
+      firstName: getFormValue(form, "firstName"),
+      lastName: getFormValue(form, "lastName"),
+      age: getFormValue(form, "age"),
+      email: getFormValue(form, "email"),
+      availability: getFormValue(form, "availability"),
+      questions: getCheckedQuestions(form),
+      generatedId: generatedId,
+      origin: window.location.href,
+      website: getFormValue(form, "website") // honeypot field
     };
-  }
 
-  async function sendApplicationWebhook(form, generatedId) {
-    const webhookUrl = config.webhooks && config.webhooks.application;
-
-    if (!webhookUrl) return;
-
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(buildApplicationWebhookPayload(form, generatedId))
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
-      throw new Error(`Webhook Discord indisponible (${response.status})`);
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || `Erreur serveur (${response.status})`);
     }
   }
 
@@ -510,7 +451,7 @@
       }
 
       try {
-        await sendApplicationWebhook(form, generatedId);
+        await sendApplicationToProxy(form, generatedId);
       } catch (_error) {
         if (submitButton) {
           submitButton.disabled = false;
