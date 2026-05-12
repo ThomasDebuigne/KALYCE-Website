@@ -275,13 +275,13 @@
 
 <!-- Ecran d'entree -->
 <div id="intro">
-  <div id="intro-text">cliquer pour continuer</div>
+  <div id="intro-text">cliquez pour continuer</div>
 </div>
 
 <div id="flash"></div>
 <div id="static"></div>
 <div id="stage"></div>
-<audio id="screamer-audio" src="../assets/sounds/kvn4qz91/le_saut_de_peur.wav" preload="auto" autoplay></audio>
+<audio id="screamer-audio" src="../assets/sounds/kvn4qz91/le_saut_de_peur.wav" preload="auto"></audio>
 
 <!-- SECTION ARCHIVE CACHEE INITIALEMENT -->
 <div id="archive" style="display:none; background:#050505; color:#777; font-family:'Courier New', monospace; padding:50px; min-height:100vh; overflow-x:hidden; cursor:none; position:relative; z-index:9999;">
@@ -1021,17 +1021,7 @@ function tryStartScreamerAudio(reset = false) {
 }
 
 function scheduleAutoplayRetries() {
-  if (autoplayRetryTimer) return;
-
-  autoplayRetryTimer = setInterval(() => {
-    autoplayRetryCount += 1;
-    tryStartScreamerAudio(false);
-
-    if (screamerAudioStarted || autoplayRetryCount > 40) {
-      clearInterval(autoplayRetryTimer);
-      autoplayRetryTimer = null;
-    }
-  }, 250);
+  // No-op: audio is now only triggered by user click on "continuer"
 }
 
 function startScreamerSequence() {
@@ -1114,23 +1104,7 @@ if (hasAlreadyClickedContinue()) {
 }
 
 intro.addEventListener('click', startScreamerSequence);
-function retryScreamerAudioAfterBrowserEvent() {
-  if (!sequenceStarted || screamerAudioStarted) return;
-  tryStartScreamerAudio(false);
-}
-
-['pointerdown', 'touchstart', 'touchmove', 'mousedown', 'mousemove', 'keydown', 'scroll'].forEach((eventName) => {
-  window.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
-  document.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
-});
-
-['focus', 'pageshow', 'pagehide', 'load', 'online'].forEach((eventName) => {
-  window.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
-});
-
-['visibilitychange', 'readystatechange', 'DOMContentLoaded'].forEach((eventName) => {
-  document.addEventListener(eventName, retryScreamerAudioAfterBrowserEvent, { passive: true });
-});
+// Audio retry listeners removed — screamer sound now only plays after clicking "continuer"
 
 if (navigator.mediaSession) {
   try {
@@ -1141,10 +1115,6 @@ if (navigator.mediaSession) {
     });
   } catch (_error) {}
 }
-
-setTimeout(() => {
-  retryScreamerAudioAfterBrowserEvent();
-}, 0);
 </script>
 </body>
 </html>
