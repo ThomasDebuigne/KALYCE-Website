@@ -1,0 +1,23 @@
+# KALYCE — Rapport de sécurité
+# Ce fichier n'est pas destiné aux autorités.
+
+Contact: mailto:ne-repondez-pas@kalyce.internal
+Expires: 2099-12-31T23:59:59.000Z
+Preferred-Languages: fr
+
+# Vous cherchez une faille de sécurité ?
+# La seule faille, c'est d'avoir ouvert ce fichier.
+#
+# KALYCE n'a pas de programme de bug bounty.
+# KALYCE n'a pas de responsable sécurité.
+# KALYCE n'a pas de politique de divulgation.
+#
+# Si vous avez trouvé quelque chose, demandez-vous
+# pourquoi on vous a laissé le trouver.
+#
+# Journal KSD-EXT-07 : entrée ajoutée.
+# Comportement : reconnaissance active.
+# Profil : curieux. Peut-être utile.
+#
+# Ne supprimez pas votre historique.
+# Nous l'avons déjà copié.

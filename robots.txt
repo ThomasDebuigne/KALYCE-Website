@@ -1,0 +1,28 @@
+# KALYCE — Système interne
+# Toute tentative d'indexation est enregistrée.
+# Ne cherchez pas ce qui ne vous concerne pas.
+
+User-agent: *
+Disallow: /archives/sujets/
+Disallow: /ROOM1/
+Disallow: /protocole-deviance/
+Disallow: /k-14/rapports/
+Disallow: /k-22/observations/
+Disallow: /k-31/echec-partiel/
+Disallow: /great-show/invitations/
+Disallow: /papa/dossier-complet/
+Disallow: /patiente-001/statut-interne/
+Disallow: /personnel/liste-noire/
+Disallow: /correction-humaine/resultats/
+Disallow: /signal/origine/
+Disallow: /entites/non-classifiees/
+Disallow: /confinement/duree-reelle/
+Disallow: /interface-invisible/
+
+# Les chemins ci-dessus n'existent peut-être pas.
+# Mais quelqu'un les a déjà cherchés avant vous.
+
+# Si vous lisez ceci, votre adresse IP a été ajoutée
+# au journal d'observation KSD-EXT-07.
+
+# Ne revenez pas.

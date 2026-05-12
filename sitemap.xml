@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ce sitemap ne contient pas ce que vous cherchez.
+  Les pages réelles ne sont pas indexées.
+  Les pages fictives ci-dessous n'existent pas.
+  Ou n'existent plus.
+  
+  Journal KSD-EXT-07 : accès au sitemap détecté.
+  Vous êtes en train de cartographier un territoire qui change.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kalyce.vercel.app/</loc>
+    <lastmod>2026-05-12</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <!-- Les entrées suivantes ont été supprimées par directive interne. -->
+  <!-- <url><loc>/archives/sujets/liste-complete</loc></url> -->
+  <!-- <url><loc>/ROOM1/journal-observation</loc></url> -->
+  <!-- <url><loc>/great-show/invitations-2026</loc></url> -->
+  <!-- <url><loc>/papa/dossier-1963</loc></url> -->
+  <!-- <url><loc>/patiente-001/evolution</loc></url> -->
+  <!-- <url><loc>/protocole-deviance/resultats-actuels</loc></url> -->
+  <!-- <url><loc>/personnel/opérateurs-nuit</loc></url> -->
+  <!-- Si vous décommentez ces lignes, rien ne se passera. -->
+  <!-- Sauf dans le journal. -->
+</urlset>

@@ -1,3 +1,13 @@
+<!--
+  Vous inspectez le formulaire de candidature.
+  Intéressant. La plupart des candidats se contentent de remplir.
+
+  Note : le champ "website" est un piège.
+  Si vous le voyez, vous n'êtes pas le public visé.
+  Mais vous êtes peut-être le profil que nous recherchons.
+
+  Tapez KALYCE_HELP() dans la console.
+-->
 <!doctype html>
 <html lang="fr">
   <head>
@@ -5,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Candidature / KALYCE</title>
     <link rel="stylesheet" href="/css/apply.css">
+    <script src="/js/console-trap.js" defer></script>
     <script src="/js/config.js" defer></script>
     <script src="/js/main.js" defer></script>
   </head>
@@ -80,6 +91,14 @@
               <div class="form-header">
                 <span>FORM-KSD-06</span>
                 <span>statut : ouvert</span>
+              </div>
+
+              <!-- Honeypot anti-bot field — invisible to humans -->
+              <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;">
+                <label>
+                  Ne remplissez pas ce champ
+                  <input name="website" type="text" tabindex="-1" autocomplete="off">
+                </label>
               </div>
 
               <h2>Identification</h2>

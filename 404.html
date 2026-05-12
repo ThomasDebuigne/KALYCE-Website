@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ERREUR / KALYCE</title>
+    <style>
+      :root {
+        --bg: #000000;
+        --red: #ff2020;
+        --acid: #ffff00;
+        --green: #00ff66;
+        --gray: #b9b9b9;
+        --mono: "Courier New", Courier, monospace;
+        --serif: "Times New Roman", Times, serif;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        height: 100%;
+        background: #000;
+        color: #fff;
+        font-family: var(--mono);
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 24px;
+      }
+
+      body::after {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        pointer-events: none;
+        content: "";
+        opacity: 0.06;
+        background: repeating-linear-gradient(
+          180deg,
+          transparent 0 2px,
+          #fff 2px 3px
+        );
+      }
+
+      .error-code {
+        font-family: var(--serif);
+        font-size: clamp(80px, 18vw, 200px);
+        color: var(--red);
+        text-shadow: 6px 6px 0 #440000;
+        line-height: 1;
+        animation: glitchCode 3s steps(2) infinite;
+      }
+
+      .error-label {
+        margin-top: 12px;
+        color: var(--acid);
+        font-size: 16px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        animation: blink 700ms steps(2) infinite;
+      }
+
+      .error-message {
+        max-width: 600px;
+        margin-top: 32px;
+        color: var(--gray);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .error-message strong {
+        color: var(--green);
+      }
+
+      .error-log {
+        margin-top: 28px;
+        padding: 18px 24px;
+        border: 1px dashed var(--red);
+        background: #080000;
+        color: var(--red);
+        font-size: 13px;
+        line-height: 1.8;
+        text-align: left;
+        max-width: 520px;
+        width: 100%;
+      }
+
+      .error-log span {
+        color: var(--gray);
+      }
+
+      .error-back {
+        display: inline-block;
+        margin-top: 28px;
+        padding: 10px 32px;
+        border: 2px outset #999;
+        background: var(--acid);
+        color: #000;
+        font-family: var(--mono);
+        font-size: 14px;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .error-back:hover {
+        border-style: inset;
+        background: var(--red);
+        color: #fff;
+      }
+
+      .hidden-message {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.02);
+        font-size: 11px;
+        user-select: all;
+        pointer-events: auto;
+      }
+
+      @keyframes glitchCode {
+        0%, 92% { opacity: 1; transform: none; }
+        93% { opacity: 0.7; transform: translate(-3px, 2px) skewX(-2deg); }
+        94% { opacity: 1; transform: translate(2px, -1px); }
+        95%, 100% { opacity: 1; transform: none; }
+      }
+
+      @keyframes blink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0.3; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 
+      ██████████████████████████████████████████████████████████
+      █                                                      █
+      █   Vous cherchez quelque chose qui n'existe pas.       █
+      █   Ou quelque chose qui n'existe plus.                 █
+      █                                                      █
+      █   Dans les deux cas, KALYCE a noté votre passage.     █
+      █                                                      █
+      █   Journal KSD-EXT-07 : tentative d'accès non-mappé.  █
+      █   Classification : reconnaissance.                    █
+      █   Recommandation : observation passive.               █
+      █                                                      █
+      █   Ne supprimez pas votre cache.                       █
+      █   Nous y avons déjà inscrit quelque chose.            █
+      █                                                      █
+      ██████████████████████████████████████████████████████████
+    -->
+
+    <div class="error-code">404</div>
+    <div class="error-label">chemin non référencé</div>
+
+    <div class="error-message">
+      Cette page n'existe pas dans l'index public.<br>
+      Votre tentative d'accès a été <strong>enregistrée</strong>.<br>
+      Si vous cherchiez un dossier classifié, il a peut-être été déplacé.<br>
+      Si vous cherchiez une faille, vous venez d'en créer une dans votre propre trace.
+    </div>
+
+    <div class="error-log">
+      > requête interceptée<br>
+      > chemin demandé : <span id="requested-path">inconnu</span><br>
+      > statut : non autorisé<br>
+      > journal : KSD-EXT-07<br>
+      > action : <span>observation passive activée</span><br>
+      > recommandation : <span style="color: var(--acid);">quittez cette page</span>
+    </div>
+
+    <a class="error-back" href="/">Retour à l'accueil</a>
+
+    <!-- Si vous lisez le code source de la page 404, bravo. Mais ne vous arrêtez pas là. -->
+    <!-- Le terminal accepte des commandes que l'aide ne liste pas. -->
+    <!-- Cherchez : "failed" -->
+
+    <div class="hidden-message">
+      Vous avez sélectionné ce texte. Vous êtes plus attentif que la plupart.
+      KALYCE surveille les visiteurs qui lisent les pixels invisibles.
+      Identifiant provisoire : KSD-OBS-404.
+    </div>
+
+    <script>
+      // Affiche le chemin demandé dans le log
+      document.getElementById("requested-path").textContent = window.location.pathname;
+
+      // Message console pour la page 404
+      console.log(
+        "%c KALYCE — ACCÈS REFUSÉ ",
+        "background: #ff2020; color: #000; font-weight: bold; padding: 4px 8px; font-size: 14px;"
+      );
+      console.log(
+        "%cVous avez tenté d'accéder à un chemin qui n'existe pas.\nOu qui n'existe plus.\n\nVotre passage a été noté dans le journal KSD-EXT-07.\nNe revenez pas sans invitation.",
+        "color: #b9b9b9; font-size: 12px;"
+      );
+    </script>
+  </body>
+</html>

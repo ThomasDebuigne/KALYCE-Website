@@ -1,4 +1,27 @@
 (function () {
+  /**
+   * ┌────────────────────────────────────────────────────────┐
+   * │ KALYCE — Système d'interface civile                    │
+   * │ Build : KSD-1979.06                                    │
+   * │                                                        │
+   * │ Ce fichier est lu par le navigateur.                    │
+   * │ Il est aussi lu par VOUS, en ce moment.                 │
+   * │                                                        │
+   * │ Si vous êtes développeur : respect.                     │
+   * │ Si vous cherchez une vulnérabilité : bonne chance.      │
+   * │ Si vous cherchez la vérité : elle n'est pas dans le JS. │
+   * │                                                        │
+   * │ Cherchez plutôt :                                       │
+   * │   → robots.txt                                          │
+   * │   → humans.txt                                          │
+   * │   → /.well-known/security.txt                           │
+   * │   → La commande "failed" dans le terminal               │
+   * │   → KALYCE_HELP() dans la console                       │
+   * │                                                        │
+   * │ Et si vous trouvez le message invisible sur la 404...   │
+   * │ alors vous méritez peut-être de savoir la suite.        │
+   * └────────────────────────────────────────────────────────┘
+   */
   const config = window.KSD_CONFIG;
   const keys = config.storage;
   const $ = (selector, root = document) => root.querySelector(selector);

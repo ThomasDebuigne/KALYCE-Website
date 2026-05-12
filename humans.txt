@@ -1,0 +1,24 @@
+/* HUMANS.TXT */
+
+/* ÉQUIPE */
+   Responsable : [EXPURGÉ]
+   Contact : ne pas chercher à nous contacter
+   Localisation : variable
+
+/* SITE */
+   Dernière mise à jour : consultez votre propre journal
+   Standards : aucun reconnu par des institutions publiques
+   Composants : HTML, CSS, JS — rien de plus, rien de moins
+   Logiciel : aucun framework externe — tout a été écrit à la main
+
+/* NOTE */
+   Si vous lisez ce fichier, vous cherchez des humains.
+   KALYCE ne garantit pas que tous les contributeurs
+   de ce projet le soient encore.
+
+   Le terme « humain » est utilisé ici par convention.
+   Pas par certitude.
+
+/* AVERTISSEMENT */
+   Ce fichier est le dernier endroit sûr du site.
+   Tout ce qui suit est enregistré.
